@@ -17,11 +17,11 @@ public class RegistrationController {
     }
 
     @GetMapping("/confirm")
-    public ResponseEntity<Void> confirm(
+    public ResponseEntity<String> confirm(
             @RequestParam("token") String token) {
-
-        log.info("Confirmation token: {}", token);
-        return ResponseEntity.noContent().build();
+        String response = "Confirmation token: " + token;
+        log.info(response);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping
