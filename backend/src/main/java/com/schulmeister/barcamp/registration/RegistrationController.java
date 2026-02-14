@@ -19,7 +19,7 @@ public class RegistrationController {
     @GetMapping("/confirm")
     public ResponseEntity<String> confirm(
             @RequestParam("token") String token) {
-        String response = "Confirmation token: " + token;
+        String response = "Confirmation test token: " + token;
         log.info(response);
         return ResponseEntity.ok(response);
     }

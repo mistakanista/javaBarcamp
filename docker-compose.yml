@@ -1,12 +1,12 @@
 services:
-#  db:
-#    image: postgres:16
-#    environment:
-#      POSTGRES_DB: barcamp
-#      POSTGRES_USER: barcamp
-#      POSTGRES_PASSWORD: barcamp
-#    ports:
-#      - "5432:5432"
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: barcamp
+      POSTGRES_USER: barcamp
+      POSTGRES_PASSWORD: barcamp
+    ports:
+      - "5432:5432"
 
   backend:
     build: ./backend
