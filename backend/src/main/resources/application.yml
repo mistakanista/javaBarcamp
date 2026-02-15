@@ -3,6 +3,8 @@ spring:
     url: jdbc:postgresql://db:5432/barcamp
     username: barcamp
     password: barcamp
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
 #
 #  jpa:
 #    hibernate:

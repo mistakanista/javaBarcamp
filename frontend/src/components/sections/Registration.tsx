@@ -41,8 +41,23 @@ export const Registration = () => {
     setIsSubmitting(true);
     
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    const response = await fetch("/api/registrations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        acceptConditions: formData.agreeTerms,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Registration failed");
+    }
+
     toast({
       title: "Registration Successful! ☕",
       description: "You're now registered for Java Barcamp Frankfurt 2026!",
@@ -84,7 +99,7 @@ export const Registration = () => {
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Max Mustermann"
+                    placeholder="Your name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="h-12"

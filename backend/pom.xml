@@ -44,13 +44,11 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>11.20.2</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
 
         <!-- Tests -->
         <dependency>
