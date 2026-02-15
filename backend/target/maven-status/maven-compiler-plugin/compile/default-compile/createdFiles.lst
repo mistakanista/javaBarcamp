@@ -1,7 +1,0 @@
-original/EmailSender.class
-original/OrderService.class
-com/schulmeister/barcamp/BarcampApplication.class
-com/schulmeister/barcamp/registration/RegistrationController.class
-adapt/parameter/OrderService.class
-com/schulmeister/barcamp/registration/RegistrationRequest.class
-adapt/parameter/MessageSender.class
