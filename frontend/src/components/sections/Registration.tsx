@@ -53,16 +53,26 @@ export const Registration = () => {
         acceptConditions: formData.agreeTerms,
       }),
     });
-
-    if (!response.ok) {
-      throw new Error("Registration failed");
+    console.log("resp", response);
+    if (response.status === 409) {
+      toast({
+        title: "Already registered",
+        description: "This email is already registered.",
+        variant: "destructive",
+      });
+    } else if (response.status >= 400) {
+      toast({
+        title: "Registration failed",
+        description: "There was an error when trying to register.",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Registration Successful! ☕",
+        description: "Please check your emails to complete the registration for Java Barcamp Frankfurt 2026!",
+      });
     }
 
-    toast({
-      title: "Registration Successful! ☕",
-      description: "You're now registered for Java Barcamp Frankfurt 2026!",
-    });
-    
     setFormData({ name: "", email: "", company: "", agreeTerms: false });
     setIsSubmitting(false);
   };
