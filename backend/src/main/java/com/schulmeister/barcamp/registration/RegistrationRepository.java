@@ -8,5 +8,7 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
     Optional<Registration> findByEmail(String email);
 
+    Optional<Registration> findByConfirmationToken(String token);
+
 }
 

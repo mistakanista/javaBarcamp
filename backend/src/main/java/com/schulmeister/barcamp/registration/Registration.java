@@ -34,6 +34,9 @@ public class Registration {
     @Column(nullable = false)
     private LocalDateTime lastModified;
 
+    @Column(unique = true)
+    private String confirmationToken;
+
     @PrePersist
     @PreUpdate
     public void updateTimestamp() {

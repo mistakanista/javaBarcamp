@@ -64,3 +64,30 @@ databaseChangeLog:
                   defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
+  - changeSet:
+      id: 2-add-hash-column
+      author: gernotschulmeister
+      changes:
+        - addColumn:
+            tableName: registration
+            columns:
+              - column:
+                  name: hash
+                  type: VARCHAR(255)
+  - changeSet:
+      id: 3-change-token-column
+      author: gernotschulmeister
+      changes:
+        - addColumn:
+            tableName: registration
+            columns:
+              - column:
+                  name: confirmation_token
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+        - dropColumn:
+            tableName: registration
+            columns:
+              - column:
+                  name: hash
