@@ -16,12 +16,19 @@ import java.util.UUID;
 @Slf4j
 public class RegistrationService {
 
+    public static final String REGISTRATION_SUCCESSFUL = "Registration successful for email: ";
+    public static final String CONFIRMATION_TOKEN = "Confirmation token:";
+    public static final String REGISTERED_EMAIL = "Registration attempt with already registered email: ";
+    public static final String ERROR_SAVING = "Error saving registration for email: ";
+    public static final String INVALID_CONFIRMATION_TOKEN = "Invalid confirmation token or user already registered";
+    public static final String REGISTRATION_CONFIRMED = "Registration confirmed for: ";
+    public static final String REGISTRATION_NOT_FOND = "Registration could not be found or invalid confirmation token: ";
     private RegistrationRepository repository;
 
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequest request) {
         String response;
         if (repository.findByEmail(request.getEmail()).isPresent()) {
-            response = "Registration attempt with already registered email: " + request.getEmail();
+            response = REGISTERED_EMAIL + request.getEmail();
             log.warn(response);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }
@@ -37,10 +44,10 @@ public class RegistrationService {
         registration.setConfirmationToken(token);
         log.info("token {}", token);
         try {
-            response = "Registration successful for email: " + request.getEmail() + ". Confirmation token: " + token;
+            response = REGISTRATION_SUCCESSFUL + request.getEmail() + ". " + CONFIRMATION_TOKEN + " " + token;
             repository.save(registration);
         } catch (Exception e) {
-            response = "error saving registration for email: " + request.getEmail();
+            response = ERROR_SAVING + request.getEmail();
             log.error(response + " {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
@@ -48,7 +55,7 @@ public class RegistrationService {
     }
 
     public String findUser(String token) {
-        String response = "Registration could not be found or invalid confirmation token: " + token;
+        String response = REGISTRATION_NOT_FOND + token;
         Optional<Registration> registrationOptional = repository.findByConfirmationToken(token);
         if (registrationOptional.isPresent()) {
             response = handleRegistration(registrationOptional.get());
@@ -59,11 +66,11 @@ public class RegistrationService {
     private String handleRegistration(Registration registration) {
         String response;
         if (registration.isConfirmedRegistration()) {
-            response = "Invalid confirmation token or user already registered";
+            response = INVALID_CONFIRMATION_TOKEN;
         } else {
             registration.setConfirmedRegistration(true);
             repository.save(registration);
-            response = "Registration confirmed for: " + registration.getEmail();
+            response = REGISTRATION_CONFIRMED + registration.getEmail();
         }
 
         return response;
