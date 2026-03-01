@@ -1,4 +1,4 @@
-import { Coffee, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Code2, Github, Twitter, Linkedin, Mail } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -8,8 +8,8 @@ export const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Coffee className="text-primary" size={28} />
-              <span className="text-xl font-bold">Java Barcamp Frankfurt</span>
+              <Code2 className="text-primary" size={28} />
+              <span className="text-xl font-bold">Developer Barcamp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               The premier Java unconference in Frankfurt am Main. 

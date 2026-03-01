@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Building, CheckCircle } from "lucide-react";
+import { User, Mail, Building, ArrowRight } from "lucide-react";
 
 export const Registration = () => {
   const { toast } = useToast();
@@ -19,7 +19,7 @@ export const Registration = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name.trim() || !formData.email.trim()) {
       toast({
         title: "Missing Information",
@@ -39,7 +39,7 @@ export const Registration = () => {
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     const response = await fetch("/api/registrations", {
       method: "POST",
@@ -78,97 +78,86 @@ export const Registration = () => {
   };
 
   return (
-    <section id="register" className="py-24 bg-muted/50">
+    <section id="register" className="py-24 mesh-bg">
       <div className="section-container">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Join the <span className="text-gradient">Community</span>
+        <div className="max-w-lg mx-auto">
+          <div className="mb-10">
+            <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Registration</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
+              Grab your spot
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Reserve your spot at Frankfurt's premier Java unconference
+            <p className="text-muted-foreground">
+              Free entry. Limited to 200 participants.
             </p>
           </div>
 
-          <Card className="glass-card shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="text-primary" />
-                Registration Form
-              </CardTitle>
-              <CardDescription>
-                Fill in your details to secure your spot. It's free!
+          <Card className="border border-border shadow-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base">Your details</CardTitle>
+              <CardDescription className="text-sm">
+                We'll send a confirmation to your email.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="flex items-center gap-2">
-                    <User size={16} />
-                    Full Name *
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="space-y-1.5">
+                  <Label htmlFor="name" className="text-sm flex items-center gap-1.5">
+                    <User size={14} className="text-muted-foreground" />
+                    Full Name
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Your name"
+                    placeholder="Jane Developer"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="h-12"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="flex items-center gap-2">
-                    <Mail size={16} />
-                    Email Address *
+                <div className="space-y-1.5">
+                  <Label htmlFor="email" className="text-sm flex items-center gap-1.5">
+                    <Mail size={14} className="text-muted-foreground" />
+                    Email
                   </Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="max@example.com"
+                    placeholder="jane@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="h-12"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="company" className="flex items-center gap-2">
-                    <Building size={16} />
-                    Company (Optional)
+                <div className="space-y-1.5">
+                  <Label htmlFor="company" className="text-sm flex items-center gap-1.5">
+                    <Building size={14} className="text-muted-foreground" />
+                    Company
+                    <span className="text-muted-foreground font-normal">— optional</span>
                   </Label>
                   <Input
                     id="company"
-                    placeholder="Your Company"
+                    placeholder="Acme Inc."
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="h-12"
                   />
                 </div>
 
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-2.5 pt-1">
                   <Checkbox
                     id="terms"
                     checked={formData.agreeTerms}
                     onCheckedChange={(checked) => setFormData({ ...formData, agreeTerms: checked as boolean })}
+                    className="mt-0.5"
                   />
-                  <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                    I agree to participate in the barcamp and understand that session topics are proposed on the day of the event.
+                  <Label htmlFor="terms" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                    I understand this is an unconference — session topics are proposed on the day by participants.
                   </Label>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  variant="hero" 
-                  size="lg" 
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>Processing...</>
-                  ) : (
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Registering…" : (
                     <>
-                      <CheckCircle size={18} />
                       Complete Registration
+                      <ArrowRight size={16} />
                     </>
                   )}
                 </Button>

@@ -2,86 +2,75 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Crown, Award } from "lucide-react";
 
 const goldSponsors = [
-  { name: "Oracle", logo: "☕" },
+  { name: "GitHub", logo: "🐙" },
   { name: "JetBrains", logo: "🧠" },
-  { name: "Red Hat", logo: "🎩" },
+  { name: "Google Cloud", logo: "☁️" },
 ];
 
 const silverSponsors = [
-  { name: "Amazon AWS", logo: "☁️" },
-  { name: "Microsoft Azure", logo: "💠" },
-  { name: "Spring", logo: "🌱" },
-  { name: "Gradle", logo: "🐘" },
+  { name: "Vercel", logo: "▲" },
+  { name: "Netlify", logo: "◆" },
+  { name: "DigitalOcean", logo: "🌊" },
+  { name: "Atlassian", logo: "🔷" },
 ];
 
 export const Sponsors = () => {
   return (
-    <section id="sponsors" className="py-24 bg-background">
+    <section id="sponsors" className="py-24 bg-muted/30">
       <div className="section-container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="text-gradient">Sponsors</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Thanks to our amazing sponsors who make this event possible
-          </p>
-        </div>
-
-        {/* Gold Sponsors */}
         <div className="mb-16">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Crown className="text-gold" size={28} />
-            <h3 className="text-2xl font-bold">Gold Sponsors</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {goldSponsors.map((sponsor) => (
-              <Card 
-                key={sponsor.name} 
-                className="group relative overflow-hidden border-2 border-gold/30 hover:border-gold transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-              >
-                <div className="absolute inset-0 gold-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
-                <CardContent className="p-8 flex flex-col items-center justify-center min-h-[160px]">
-                  <span className="text-5xl mb-4">{sponsor.logo}</span>
-                  <span className="text-xl font-semibold">{sponsor.name}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Silver Sponsors */}
-        <div>
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Award className="text-silver" size={24} />
-            <h3 className="text-xl font-bold text-muted-foreground">Silver Sponsors</h3>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {silverSponsors.map((sponsor) => (
-              <Card 
-                key={sponsor.name} 
-                className="group relative overflow-hidden border border-silver/30 hover:border-silver transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
-              >
-                <div className="absolute inset-0 silver-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
-                <CardContent className="p-6 flex flex-col items-center justify-center min-h-[120px]">
-                  <span className="text-3xl mb-2">{sponsor.logo}</span>
-                  <span className="text-sm font-medium text-muted-foreground">{sponsor.name}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Become a Sponsor CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-4">
-            Interested in sponsoring Java Barcamp Frankfurt?
+          <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Partners</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+            Our Sponsors
+          </h2>
+          <p className="text-muted-foreground max-w-md">
+            Made possible by companies that care about the developer community.
           </p>
-          <a 
-            href="mailto:sponsors@javabarcamp-frankfurt.de" 
-            className="text-primary font-semibold hover:underline"
-          >
-            Contact us for sponsorship opportunities →
-          </a>
+        </div>
+
+        {/* Gold */}
+        <div className="mb-14">
+          <div className="flex items-center gap-2 mb-6">
+            <Crown className="text-gold" size={18} />
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gold">Gold</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {goldSponsors.map((s) => (
+              <Card key={s.name} className="group border-gold/20 hover:border-gold/40 transition-colors">
+                <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
+                  <span className="text-4xl mb-3">{s.logo}</span>
+                  <span className="font-medium">{s.name}</span>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Silver */}
+        <div className="mb-14">
+          <div className="flex items-center gap-2 mb-6">
+            <Award className="text-silver" size={18} />
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-silver">Silver</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {silverSponsors.map((s) => (
+              <Card key={s.name} className="group border-silver/20 hover:border-silver/40 transition-colors">
+                <CardContent className="p-6 flex flex-col items-center justify-center min-h-[110px]">
+                  <span className="text-2xl mb-2">{s.logo}</span>
+                  <span className="text-sm text-muted-foreground font-medium">{s.name}</span>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div className="pt-4">
+          <p className="text-sm text-muted-foreground">
+            Want to support the developer community?{" "}
+            <a href="mailto:sponsors@devbarcamp-frankfurt.de" className="text-primary hover:underline">
+              Become a sponsor →
+            </a>
+          </p>
         </div>
       </div>
     </section>
