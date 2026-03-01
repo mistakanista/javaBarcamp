@@ -12,7 +12,7 @@ export const Footer = () => {
               <span className="text-xl font-bold">Developer Barcamp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              The premier Java unconference in Frankfurt am Main. 
+              The premier Developer unconference in Frankfurt am Main.
               By the community, for the community.
             </p>
           </div>
@@ -72,7 +72,7 @@ export const Footer = () => {
               </a>
             </div>
             <p className="text-sm text-primary-foreground/70">
-              info@javabarcamp-frankfurt.de
+              info@devcamp-frankfurt.de
             </p>
           </div>
         </div>
@@ -80,7 +80,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center">
           <p className="text-sm text-primary-foreground/50">
-            © {new Date().getFullYear()} Java Barcamp Frankfurt. Made with ☕ and ❤️
+            © {new Date().getFullYear()} Developer Barcamp Frankfurt. Made with ☕ and ❤️
           </p>
         </div>
       </div>

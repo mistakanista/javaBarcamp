@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Users, ArrowRight } from "lucide-react";
 
+const test = decodeURIComponent("%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='monospace' font-size='14' font-weight='bold' fill='%23ffffff' opacity='0.09'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E")
+
+console.log("test",test);
 export const Hero = () => {
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden flex items-center">
@@ -39,9 +42,9 @@ export const Hero = () => {
           {/* Meta */}
           <div className="flex flex-wrap gap-6 mb-10 animate-slide-up" style={{ animationDelay: "0.15s" }}>
             {[
-              { icon: Calendar, text: "March 15, 2026" },
+              { icon: Calendar, text: "October 15, 2026" },
               { icon: MapPin, text: "Frankfurt am Main" },
-              { icon: Users, text: "200 Developers" },
+              { icon: Users, text: "100 Developers" },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-2 text-primary-foreground/50 text-sm">
                 <Icon size={16} className="text-primary/70" />
