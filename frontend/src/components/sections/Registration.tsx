@@ -87,7 +87,7 @@ export const Registration = () => {
               Grab your spot
             </h2>
             <p className="text-muted-foreground">
-              Free entry. Limited to 200 participants.
+              Free entry. Limited to 100 participants.
             </p>
           </div>
 
