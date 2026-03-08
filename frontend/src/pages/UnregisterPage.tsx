@@ -1,4 +1,5 @@
 import { UnRegistration } from "@/components/sections/UnRegistration";
+import { Footer } from "@/components/sections/Footer";
 
 export default function UnregisterPage() {
 
@@ -6,9 +7,7 @@ export default function UnregisterPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <div className="text-center">
         <UnRegistration />
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
+        <Footer />
       </div>
     </div>
   );
