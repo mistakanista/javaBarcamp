@@ -12,10 +12,6 @@ export const Hero = () => {
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='monospace' font-size='14' font-weight='bold' fill='%23ffffff' opacity='0.09'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E")`,
       }} />
 
-      {/* Gradient orb */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-1/6 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-
       <div className="relative section-container py-32">
         <div className="max-w-3xl">
           {/* Tag */}

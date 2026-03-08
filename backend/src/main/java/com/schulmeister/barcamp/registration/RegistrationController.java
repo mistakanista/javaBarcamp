@@ -20,6 +20,11 @@ public class RegistrationController {
         return registrationService.register(request);
     }
 
+    @PostMapping("unregister")
+    public ResponseEntity<String> unRegisterRequest(@RequestBody @Valid UnRegistrationRequest request) {
+        return registrationService.unRegisterRequest(request);
+    }
+
     @GetMapping("/confirm")
     public ResponseEntity<String> confirm(
             @RequestParam("token") String token) {

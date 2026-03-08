@@ -91,3 +91,15 @@ databaseChangeLog:
             columns:
               - column:
                   name: hash
+  - changeSet:
+      id: 4-add-unregister-token
+      author: gernotschulmeister
+      changes:
+        - addColumn:
+            tableName: registration
+            columns:
+              - column:
+                  name: unregister_token
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
