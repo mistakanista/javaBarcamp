@@ -119,12 +119,52 @@ class RegistrationServiceTest {
         registration.setConfirmedRegistration(true);
         registration.setEmail(email);
 
-        when(repository.findByConfirmationToken(token)).thenReturn((java.util.Optional.of(registration)));
+        when(repository.findByConfirmationToken(token)).thenReturn(Optional.of(registration));
 
         String response = registrationService.findUser(token);
         assertNotNull(response);
         assertNotEquals("", response);
         assertTrue(response.contains(INVALID_CONFIRMATION_TOKEN));
+    }
+
+    @Test
+    void unregistrationNoEmail() {
+
+        UnRegistrationRequest request = UnRegistrationRequest.builder().email(email).build();
+
+        when(repository.findByEmail(email)).thenReturn(Optional.empty());
+        ResponseEntity<String> responseEntity = registrationService.unRegisterRequest(request);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+
+
+        String response = responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(NO_REGISTRATION_FOUND));
+    }
+
+    @Test
+    void unregistrationSuccess() {
+
+        UnRegistrationRequest request = UnRegistrationRequest.builder().email(email).build();
+
+        Registration registration = new Registration();
+        registration.setEmail(email);
+
+        when(repository.findByEmail(email)).thenReturn(Optional.of(registration));
+        when(repository.save(org.mockito.ArgumentMatchers.any(Registration.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+        ResponseEntity<String> responseEntity = registrationService.unRegisterRequest(request);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+
+        String response = responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(UNREGISTER_EMAIL_SENT));
+        assertTrue(response.contains(email));
     }
 
 

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ConfirmPage from "./pages/ConfirmPage";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import UnRegister from "./pages/UnregisterPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/confirm" element={<ConfirmPage />} />
+                    <Route path="/unregister" element={<UnRegister />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -37,6 +37,9 @@ public class Registration {
     @Column(unique = true)
     private String confirmationToken;
 
+    @Column(unique = true)
+    private String unregisterToken;
+
     @PrePersist
     @PreUpdate
     public void updateTimestamp() {
