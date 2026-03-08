@@ -21,8 +21,11 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <nav className="space-y-2">
-              <a href="#register" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Register
+              <a href="/" className="block text-primary-foreground/70 hover:text-primary transition-colors">
+                Home
+              </a>
+              <a href="/unregister" className="block text-primary-foreground/70 hover:text-primary transition-colors">
+                Unregister
               </a>
               <a href="#sponsors" className="block text-primary-foreground/70 hover:text-primary transition-colors">
                 Sponsors
