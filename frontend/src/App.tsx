@@ -7,6 +7,7 @@ import ConfirmPage from "./pages/ConfirmPage";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnRegister from "./pages/UnregisterPage";
+import AddSponsor from "./pages/Sponsors";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/confirm" element={<ConfirmPage />} />
-                    <Route path="/unregister" element={<UnRegister />} />
+          <Route path="/unregister" element={<UnRegister />} />
+          <Route path="/addSponsor" element={<AddSponsor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
