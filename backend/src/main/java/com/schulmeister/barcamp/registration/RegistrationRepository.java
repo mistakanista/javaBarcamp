@@ -10,5 +10,7 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
     Optional<Registration> findByConfirmationToken(String token);
 
+    Optional<Registration> findByUnregisterToken(String token);
+
 }
 

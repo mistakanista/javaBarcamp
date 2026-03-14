@@ -22,9 +22,10 @@ public class RegistrationService {
     public static final String ERROR_SAVING = "Error saving registration for email: ";
     public static final String INVALID_CONFIRMATION_TOKEN = "Invalid confirmation token or user already registered";
     public static final String REGISTRATION_CONFIRMED = "Registration confirmed for: ";
-    public static final String REGISTRATION_NOT_FOND = "Registration could not be found or invalid confirmation token: ";
+    public static final String REGISTRATION_NOT_FOND = "Registration could not be found or invalid token: ";
     public static final String NO_REGISTRATION_FOUND = "No registration with the following email could be found: ";
     public static final String UNREGISTER_EMAIL_SENT = "An email has been sent to unregister to: ";
+    public static final String UNREGISTER_SUCCESS = "Your registration has been successfully unregistered for email: ";
     private RegistrationRepository repository;
 
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequest request) {
@@ -91,6 +92,20 @@ public class RegistrationService {
         registration.setUnregisterToken(unregisterToken);
         repository.save(registration);
         response = UNREGISTER_EMAIL_SENT + request.getEmail();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    public ResponseEntity<String> deleteUser(String token) {
+        String response;
+        Optional <Registration> registrationOptional = repository.findByUnregisterToken(token);
+        if (registrationOptional.isEmpty()) {
+            response = REGISTRATION_NOT_FOND + token;
+            log.warn(response);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+        Registration registration = registrationOptional.get();
+        repository.delete(registration);
+        response = UNREGISTER_SUCCESS + registration.getEmail();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

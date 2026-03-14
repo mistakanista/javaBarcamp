@@ -36,7 +36,7 @@ public class RegistrationController {
 
 
     @DeleteMapping
-    public void unregister(@RequestParam String token) {
-        // Abmelden
+    public ResponseEntity<String> unregister(@RequestParam("token") String token) {
+        return registrationService.deleteUser(token);
     }
 }
