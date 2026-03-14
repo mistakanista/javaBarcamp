@@ -30,7 +30,7 @@ export const Hero = () => {
           {/* Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-primary-foreground mb-6 animate-slide-up">
             Java Barcamp
-            <span className="block text-gradient">Frankfurt 2026</span>
+            <span className="block">FFM 2026</span>
           </h1>
 
           {/* Subtitle */}
@@ -42,7 +42,7 @@ export const Hero = () => {
           <div className="flex flex-wrap justify-center gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <Calendar className="text-primary" size={20} />
-              <span>March 15, 2026</span>
+              <span>October 17, 2026</span>
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <MapPin className="text-primary" size={20} />
@@ -50,7 +50,7 @@ export const Hero = () => {
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <Users className="text-primary" size={20} />
-              <span>200+ Developers</span>
+              <span>100 Developers</span>
             </div>
           </div>
 

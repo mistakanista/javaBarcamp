@@ -83,7 +83,7 @@ export const Registration = () => {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Join the <span className="text-gradient">Community</span>
+              Join the Community
             </h2>
             <p className="text-lg text-muted-foreground">
               Reserve your spot at Frankfurt's premier Java unconference

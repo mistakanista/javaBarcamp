@@ -124,7 +124,7 @@ export const Topics = () => {
       <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Session <span className="text-gradient">Topics</span>
+            Session Topics
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Suggest topics you'd like to present or discuss. Vote for your favorites!

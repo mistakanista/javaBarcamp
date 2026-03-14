@@ -112,7 +112,7 @@ export const Schedule = () => {
       <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Event <span className="text-gradient">Schedule</span>
+            Event Schedule
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A full day of learning, sharing, and connecting with the Java community
