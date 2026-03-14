@@ -9,8 +9,7 @@ import java.util.UUID;
 
 import static com.schulmeister.barcamp.registration.RegistrationService.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class RegistrationServiceTest {
 
@@ -165,6 +164,46 @@ class RegistrationServiceTest {
         assertNotEquals("", response);
         assertTrue(response.contains(UNREGISTER_EMAIL_SENT));
         assertTrue(response.contains(email));
+    }
+
+    @Test
+    void deleteSuccess() {
+
+        String token = UUID.randomUUID().toString();
+
+        Registration registration = new Registration();
+        registration.setEmail(email);
+
+        when(repository.findByUnregisterToken(token)).thenReturn(Optional.of(registration));
+
+        ResponseEntity<String> responseEntity = registrationService.deleteUser(token);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+
+        String response = responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(UNREGISTER_SUCCESS));
+        assertTrue(response.contains(email));
+    }
+
+    @Test
+    void deleteFailure() {
+
+        String token = UUID.randomUUID().toString();
+
+         when(repository.findByUnregisterToken(token)).thenReturn(Optional.empty());
+
+        ResponseEntity<String> responseEntity = registrationService.deleteUser(token);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+
+
+        String response = responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(REGISTRATION_NOT_FOND));
     }
 
 
