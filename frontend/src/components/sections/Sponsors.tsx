@@ -2,9 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Crown, Award } from "lucide-react";
 
 const goldSponsors = [
-  { name: "GitHub", logo: "🐙" },
-  { name: "JetBrains", logo: "🧠" },
-  { name: "Google Cloud", logo: "☁️" },
+    { name: "SQ-Solutions", logo: "SQ-solutions.png" },
+  { name: "Accenture", logo: "accenture-logo.png" },
+  { name: "Codecentric", logo: "codecentric.svg" },
 ];
 
 const silverSponsors = [
@@ -35,11 +35,16 @@ export const Sponsors = () => {
             <h3 className="text-sm font-semibold uppercase tracking-wider text-gold">Gold</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {goldSponsors.map((s) => (
-              <Card key={s.name} className="group border-gold/20 hover:border-gold/40 transition-colors">
+            {goldSponsors.map((sponsor) => (
+              <Card key={sponsor.name} className="group border-gold/20 hover:border-gold/40 transition-colors">
                 <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
-                  <span className="text-4xl mb-3">{s.logo}</span>
-                  <span className="font-medium">{s.name}</span>
+                  <img
+                        key={sponsor.name}
+                        src={"/sponsors/" + sponsor.logo}
+                        alt={sponsor.name}
+                        className="h-16 object-contain"
+                      />
+                  <span className="font-medium">{sponsor.name}</span>
                 </CardContent>
               </Card>
             ))}
