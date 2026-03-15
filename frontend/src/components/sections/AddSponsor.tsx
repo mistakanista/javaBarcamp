@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Building, CheckCircle } from "lucide-react";
+import { User, Mail, Building, Image, BadgeEuro, ListOrdered, CheckCircle } from "lucide-react";
+import { LogoUpload } from "@/components/sections/LogoUpload";
 
 export const AddSponsor = () => {
   const { toast } = useToast();
@@ -15,6 +18,7 @@ export const AddSponsor = () => {
     company: "",
     logo: "",
     level: "",
+    sort: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,6 +42,15 @@ export const AddSponsor = () => {
       return;
     }
 
+    if (!formData.logo) {
+          toast({
+            title: "Logo Required",
+            description: "Please upload a logo.",
+            variant: "destructive",
+          });
+          return;
+        }
+
     setIsSubmitting(true);
     
     // Simulate API call
@@ -52,6 +65,7 @@ export const AddSponsor = () => {
         company: formData.company,
         logo: formData.logo,
         level: formData.level,
+        sort: formData.sort,
       }),
     });
     console.log("resp", response);
@@ -74,7 +88,7 @@ export const AddSponsor = () => {
       });
     }
 
-    setFormData({ name: "", email: "", company: "", logo: "", level: "" });
+    setFormData({ name: "", email: "", company: "", logo: "", level: "", sort: "" });
     setIsSubmitting(false);
   };
 
@@ -146,33 +160,50 @@ export const AddSponsor = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="logo" className="flex items-center gap-2">
-                    <Mail size={16} />
-                    Logo *
-                  </Label>
-                  <Input
-                    id="logo"
-                    placeholder="google.jpg"
-                    value={formData.logo}
-                    onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-                    className="h-12"
-                  />
-                </div>
+                <LogoUpload formData={formData} setFormData={setFormData} />
 
 
                 <div className="space-y-2">
                   <Label htmlFor="level" className="flex items-center gap-2">
-                    <Mail size={16} />
+                    <BadgeEuro size={16} />
                     Level *
                   </Label>
-                  <Input
-                    id="level"
-                    placeholder="gold"
-                    value={formData.level}
-                    onChange={(e) => setFormData({ ...formData, level: e.target.value })}
-                    className="h-12"
-                  />
+                  <Select
+                      value={formData.level}
+                      onValueChange={(value) => setFormData({ ...formData, level: value })}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue placeholder="Select sponsor level" />
+                      </SelectTrigger>
+
+                      <SelectContent>
+                        <SelectItem value="gold">Gold</SelectItem>
+                        <SelectItem value="silver">Silver</SelectItem>
+                      </SelectContent>
+                    </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="sort" className="flex items-center gap-2">
+                    <ListOrdered size={16} />
+                    Sort Order
+                  </Label>
+                  <Select
+                      value={formData.sort}
+                      onValueChange={(value) => setFormData({ ...formData, sort: value })}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue placeholder="Select sort order" />
+                      </SelectTrigger>
+
+                      <SelectContent>
+                        <SelectItem value="1">1</SelectItem>
+                        <SelectItem value="2">2</SelectItem>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="4">4</SelectItem>
+                        <SelectItem value="5">5</SelectItem>
+                      </SelectContent>
+                    </Select>
                 </div>
 
 

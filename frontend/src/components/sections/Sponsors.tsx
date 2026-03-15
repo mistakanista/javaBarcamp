@@ -2,16 +2,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Crown, Award } from "lucide-react";
 
 const goldSponsors = [
-  { name: "Oracle", logo: "☕" },
-  { name: "JetBrains", logo: "🧠" },
-  { name: "Red Hat", logo: "🎩" },
+    { name: "SQ-Solutions", logo: "SQ-solutions.png" },
+  { name: "Accenture", logo: "accenture-logo.png" },
+  { name: "Codecentric", logo: "codecentric.svg" },
 ];
 
 const silverSponsors = [
-  { name: "Amazon AWS", logo: "☁️" },
-  { name: "Microsoft Azure", logo: "💠" },
-  { name: "Spring", logo: "🌱" },
-  { name: "Gradle", logo: "🐘" },
+  { name: "Vercel", logo: "▲" },
+  { name: "Netlify", logo: "◆" },
+  { name: "DigitalOcean", logo: "🌊" },
+  { name: "Atlassian", logo: "🔷" },
 ];
 
 export const Sponsors = () => {
@@ -33,16 +33,17 @@ export const Sponsors = () => {
             <Crown className="text-gold" size={28} />
             <h3 className="text-2xl font-bold">Gold Sponsors</h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {goldSponsors.map((sponsor) => (
-              <Card 
-                key={sponsor.name} 
-                className="group relative overflow-hidden border-2 border-gold/30 hover:border-gold transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-              >
-                <div className="absolute inset-0 gold-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
-                <CardContent className="p-8 flex flex-col items-center justify-center min-h-[160px]">
-                  <span className="text-5xl mb-4">{sponsor.logo}</span>
-                  <span className="text-xl font-semibold">{sponsor.name}</span>
+              <Card key={sponsor.name} className="group border-gold/20 hover:border-gold/40 transition-colors">
+                <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
+                  <img
+                        key={sponsor.name}
+                        src={"/sponsors/" + sponsor.logo}
+                        alt={sponsor.name}
+                        className="h-16 object-contain"
+                      />
+                  <span className="font-medium">{sponsor.name}</span>
                 </CardContent>
               </Card>
             ))}
@@ -57,8 +58,8 @@ export const Sponsors = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {silverSponsors.map((sponsor) => (
-              <Card 
-                key={sponsor.name} 
+              <Card
+                key={sponsor.name}
                 className="group relative overflow-hidden border border-silver/30 hover:border-silver transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="absolute inset-0 silver-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
@@ -76,8 +77,8 @@ export const Sponsors = () => {
           <p className="text-muted-foreground mb-4">
             Interested in sponsoring Java Barcamp Frankfurt?
           </p>
-          <a 
-            href="mailto:sponsors@javabarcamp-frankfurt.de" 
+          <a
+            href="mailto:sponsors@javabarcamp-frankfurt.de"
             className="text-primary font-semibold hover:underline"
           >
             Contact us for sponsorship opportunities →

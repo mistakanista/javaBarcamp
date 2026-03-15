@@ -5,7 +5,10 @@ spring:
     password: barcamp
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
-#
+
+  web:
+    resources:
+      static-locations: file:uploads/
 #  jpa:
 #    hibernate:
 #      ddl-auto: validate
