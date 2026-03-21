@@ -2,40 +2,52 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Crown, Award } from "lucide-react";
 
-
-const silverSponsors = [
-  { name: "Vercel", logo: "▲" },
-  { name: "Netlify", logo: "◆" },
-  { name: "DigitalOcean", logo: "🌊" },
-  { name: "Atlassian", logo: "🔷" },
-];
-
 export const Sponsors = () => {
-  const [status, setStatus] = useState<number | null>(null);
+
   const [message, setMessage] = useState<string>("");
   const [goldSponsors, setGoldSponsors] = useState([]);
+  const [goldSponsorsFetched, setGoldSponsorsFetched] = useState(false);
+
+  const [silverSponsors, setSilverSponsors] = useState([]);
+  const [silverSponsorsFetched, setSilverSponsorsFetched] = useState(false);
   useEffect(() => {
-
-
 
       const fetchGoldSponsors = async () => {
         try {
           const res = await fetch(`/api/sponsors/list?level=gold`);
-          setStatus(res.status);
-          console.log("res", res)
 
-          const data = await res.json();   // 👈 DAS fehlt
+          const data = await res.json();
           console.log("data", data);
 
           setGoldSponsors(data);
-
         } catch {
           setMessage("Network error");
         }
       };
+      if (!goldSponsorsFetched) {
+          fetchGoldSponsors();
+          setGoldSponsorsFetched(true);
+      }
 
-      fetchGoldSponsors(); // ⚡ Aufrufen
-    }, );
+      const fetchSilverSponsors = async () => {
+              try {
+                const res = await fetch(`/api/sponsors/list?level=silver`);
+
+                const data = await res.json();   // 👈 DAS fehlt
+                console.log("data", data);
+
+                setSilverSponsors(data);
+
+              } catch {
+                setMessage("Network error");
+              }
+            };
+            if (!silverSponsorsFetched) {
+                fetchSilverSponsors();
+                setSilverSponsorsFetched(true);
+            }
+
+    }, [goldSponsorsFetched, silverSponsorsFetched], );
 
   return (
     <section id="sponsors" className="py-24 bg-background">
@@ -81,13 +93,18 @@ export const Sponsors = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {silverSponsors.map((sponsor) => (
               <Card
-                key={sponsor.name}
+                key={sponsor.company}
                 className="group relative overflow-hidden border border-silver/30 hover:border-silver transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="absolute inset-0 silver-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
                 <CardContent className="p-6 flex flex-col items-center justify-center min-h-[120px]">
-                  <span className="text-3xl mb-2">{sponsor.logo}</span>
-                  <span className="text-sm font-medium text-muted-foreground">{sponsor.name}</span>
+                  <img
+                      key={sponsor.company}
+                      src={"/sponsors/" + sponsor.logo}
+                      alt={sponsor.company}
+                      className="h-16 object-contain"
+                    />
+                  <span className="text-sm font-medium text-muted-foreground">{sponsor.company}</span>
                 </CardContent>
               </Card>
             ))}
