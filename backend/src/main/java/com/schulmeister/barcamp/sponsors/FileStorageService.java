@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.UUID;
 
 @Service
 @Slf4j
@@ -23,9 +22,9 @@ public class FileStorageService {
 
             Files.createDirectories(uploadPath);
 
-            String filename =
-                    UUID.randomUUID() + "-" + file.getOriginalFilename();
+            String filename = file.getOriginalFilename();
 
+            assert filename != null;
             Path target = uploadPath.resolve(filename);
 
             Files.copy(
