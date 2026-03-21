@@ -32,11 +32,13 @@ public class SponsorController {
         return Map.of("filename", filename);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Sponsor>> getAll() {
-        List<Sponsor> allSponsors = sponsorService.getAllSponsors();
-        log.info("all sponsors: {}", allSponsors.size());
-        return ResponseEntity.ok(allSponsors);
+    @GetMapping("/list")
+    public ResponseEntity<List<Sponsor>> findByLevel(
+            @RequestParam("level") String level) {
+
+        List<Sponsor> sponsorList = sponsorService.findByLevel(level);
+        log.info("Sponsors for level {}, {}", level, sponsorList);
+        return ResponseEntity.ok(sponsorList);
     }
 
 
