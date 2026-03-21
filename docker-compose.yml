@@ -14,6 +14,8 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    volumes:
+      - app-data:/app/uploads
 
   frontend:
     build: ./frontend
@@ -21,3 +23,7 @@ services:
       - "3000:80"
     depends_on:
       - backend
+
+volumes:
+  app-data:
+    driver: local
