@@ -50,9 +50,7 @@ public class SponsorService {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-
-    public List<Sponsor> getAllSponsors() {
-        List<Sponsor> sponsorList = new ArrayList<>();
-        return sponsorList;
+    public List<Sponsor> findByLevel(String level) {
+        return repository.findByLevelOrderBySort(level);
     }
 }

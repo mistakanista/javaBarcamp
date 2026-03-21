@@ -1,11 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 import { Crown, Award } from "lucide-react";
 
-const goldSponsors = [
-    { name: "SQ-Solutions", logo: "SQ-solutions.png" },
-  { name: "Accenture", logo: "accenture-logo.png" },
-  { name: "Codecentric", logo: "codecentric.svg" },
-];
 
 const silverSponsors = [
   { name: "Vercel", logo: "▲" },
@@ -15,6 +11,32 @@ const silverSponsors = [
 ];
 
 export const Sponsors = () => {
+  const [status, setStatus] = useState<number | null>(null);
+  const [message, setMessage] = useState<string>("");
+  const [goldSponsors, setGoldSponsors] = useState([]);
+  useEffect(() => {
+
+
+
+      const fetchGoldSponsors = async () => {
+        try {
+          const res = await fetch(`/api/sponsors/list?level=gold`);
+          setStatus(res.status);
+          console.log("res", res)
+
+          const data = await res.json();   // 👈 DAS fehlt
+          console.log("data", data);
+
+          setGoldSponsors(data);
+
+        } catch {
+          setMessage("Network error");
+        }
+      };
+
+      fetchGoldSponsors(); // ⚡ Aufrufen
+    }, );
+
   return (
     <section id="sponsors" className="py-24 bg-muted/30">
       <div className="section-container">
@@ -36,15 +58,15 @@ export const Sponsors = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {goldSponsors.map((sponsor) => (
-              <Card key={sponsor.name} className="group border-gold/20 hover:border-gold/40 transition-colors">
+              <Card key={sponsor.company} className="group border-gold/20 hover:border-gold/40 transition-colors">
                 <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
                   <img
-                        key={sponsor.name}
+                        key={sponsor.company}
                         src={"/sponsors/" + sponsor.logo}
-                        alt={sponsor.name}
+                        alt={sponsor.company}
                         className="h-16 object-contain"
                       />
-                  <span className="font-medium">{sponsor.name}</span>
+                  <span className="font-medium">{sponsor.company}</span>
                 </CardContent>
               </Card>
             ))}
