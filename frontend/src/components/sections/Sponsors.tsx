@@ -10,6 +10,7 @@ export const Sponsors = () => {
 
   const [silverSponsors, setSilverSponsors] = useState([]);
   const [silverSponsorsFetched, setSilverSponsorsFetched] = useState(false);
+  const host = "http://localhost:8080/"
   useEffect(() => {
 
       const fetchGoldSponsors = async () => {
@@ -73,7 +74,7 @@ export const Sponsors = () => {
                 <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
                   <img
                         key={sponsor.company}
-                        src={"/sponsors/" + sponsor.logo}
+                        src={host + "sponsors/" + sponsor.logo}
                         alt={sponsor.company}
                         className="h-16 object-contain"
                       />
@@ -100,7 +101,7 @@ export const Sponsors = () => {
                 <CardContent className="p-6 flex flex-col items-center justify-center min-h-[120px]">
                   <img
                       key={sponsor.company}
-                      src={"/sponsors/" + sponsor.logo}
+                      src={host + "sponsors/" + sponsor.logo}
                       alt={sponsor.company}
                       className="h-16 object-contain"
                     />
