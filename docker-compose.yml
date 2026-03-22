@@ -7,6 +7,8 @@ services:
       POSTGRES_PASSWORD: barcamp
     ports:
       - "5432:5432"
+    volumes:
+      - pg_sq_data:/var/lib/postgresql
 
   backend:
     build: ./backend
@@ -26,4 +28,6 @@ services:
 
 volumes:
   app-data:
+    driver: local
+  pg_sq_data:
     driver: local

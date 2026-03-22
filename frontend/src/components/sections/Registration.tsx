@@ -39,8 +39,7 @@ export const Registration = () => {
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
+
     const response = await fetch("/api/registrations", {
       method: "POST",
       headers: {
