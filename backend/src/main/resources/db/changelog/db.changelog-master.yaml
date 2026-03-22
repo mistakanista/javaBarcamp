@@ -159,3 +159,57 @@ databaseChangeLog:
         - renameTable:
             oldTableName: sponsors
             newTableName: sponsor
+
+  - changeSet:
+      id: 7-create-topic-table
+      author: gernotschulmeister
+      changes:
+        - createTable:
+            tableName: topic
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: categories
+                  type: TEXT
+
+              - column:
+                  name: accepted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                      nullable: false
+
+              - column:
+                  name: likes
+                  type: DECIMAL
+
+              - column:
+                  name: created
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
