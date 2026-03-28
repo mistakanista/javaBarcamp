@@ -15,7 +15,7 @@ class SponsorServiceTest {
 
     SponsorRepository repository = mock(SponsorRepository.class);
 
-    SponsorService registrationService = new SponsorService(repository);
+    SponsorService sponsorService = new SponsorService(repository);
 
     String company = "google";
 
@@ -28,7 +28,7 @@ class SponsorServiceTest {
         when(repository.save(org.mockito.ArgumentMatchers.any(Sponsor.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        ResponseEntity<String> responseEntity = registrationService.add(request);
+        ResponseEntity<String> responseEntity = sponsorService.add(request);
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
@@ -45,7 +45,7 @@ class SponsorServiceTest {
 
         when(repository.findByCompany(company)).thenReturn(Optional.of(new Sponsor()));
 
-        ResponseEntity<String> responseEntity = registrationService.add(request);
+        ResponseEntity<String> responseEntity = sponsorService.add(request);
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
@@ -64,7 +64,7 @@ class SponsorServiceTest {
         when(repository.save(org.mockito.ArgumentMatchers.any(Sponsor.class)))
                 .thenThrow(new RuntimeException("Database error"));
 
-        ResponseEntity<String> responseEntity = registrationService.add(request);
+        ResponseEntity<String> responseEntity = sponsorService.add(request);
         assertNotNull(responseEntity);
         assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
