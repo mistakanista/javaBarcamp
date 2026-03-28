@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -35,5 +37,9 @@ public class TopicService {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    public List<Topic> findAllAccepted() {
+        return repository.findByAcceptedOrderByLikesDesc(true);
     }
 }
