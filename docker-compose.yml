@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pg_sq_data:/var/lib/postgresql
+      - pg_data:/var/lib/postgresql
 
   backend:
     build: ./backend
@@ -29,5 +29,5 @@ services:
 volumes:
   app-data:
     driver: local
-  pg_sq_data:
+  pg_data:
     driver: local

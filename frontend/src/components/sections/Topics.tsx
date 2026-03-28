@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,9 +12,9 @@ interface Topic {
   id: number;
   title: string;
   description: string;
-  author: string;
-  votes: number;
-  tags: string[];
+  name: string;
+  likes: number;
+  categories: string;
 }
 
 interface TopicRequest {
@@ -24,67 +24,91 @@ interface TopicRequest {
   categories: string;
 }
 
-const initialTopics: Topic[] = [
-  {
-    id: 1,
-    title: "Virtual Threads in Production",
-    description: "Real-world experiences with Project Loom virtual threads and how they changed our application architecture",
-    author: "Anna K.",
-    votes: 24,
-    tags: ["Java 21", "Concurrency"],
-  },
-  {
-    id: 2,
-    title: "GraalVM Native Images",
-    description: "Building and deploying native Java applications with GraalVM for faster startup and lower memory",
-    author: "Marcus B.",
-    votes: 18,
-    tags: ["GraalVM", "Performance"],
-  },
-  {
-    id: 3,
-    title: "Spring Boot 3 Migration Stories",
-    description: "Lessons learned from migrating large Spring Boot 2 applications to Spring Boot 3",
-    author: "Lisa M.",
-    votes: 21,
-    tags: ["Spring Boot", "Migration"],
-  },
-  {
-    id: 4,
-    title: "Pattern Matching Best Practices",
-    description: "How to effectively use pattern matching for switch and instanceof in modern Java",
-    author: "Thomas S.",
-    votes: 15,
-    tags: ["Java 21", "Language Features"],
-  },
-  {
-    id: 5,
-    title: "Kubernetes Operators in Java",
-    description: "Building Kubernetes operators using the Java Operator SDK",
-    author: "Julia W.",
-    votes: 12,
-    tags: ["Kubernetes", "Cloud Native"],
-  },
-  {
-    id: 6,
-    title: "AI/ML Integration with Java",
-    description: "Integrating LLMs and ML models into Java applications using Langchain4j",
-    author: "Felix R.",
-    votes: 28,
-    tags: ["AI/ML", "LLM"],
-  },
-];
+// const initialTopics: Topic[] = [
+//   {
+//     id: 1,
+//     title: "Virtual Threads in Production",
+//     description: "Real-world experiences with Project Loom virtual threads and how they changed our application architecture",
+//     author: "Anna K.",
+//     votes: 24,
+//     tags: ["Java 21", "Concurrency"],
+//   },
+//   {
+//     id: 2,
+//     title: "GraalVM Native Images",
+//     description: "Building and deploying native Java applications with GraalVM for faster startup and lower memory",
+//     author: "Marcus B.",
+//     votes: 18,
+//     tags: ["GraalVM", "Performance"],
+//   },
+//   {
+//     id: 3,
+//     title: "Spring Boot 3 Migration Stories",
+//     description: "Lessons learned from migrating large Spring Boot 2 applications to Spring Boot 3",
+//     author: "Lisa M.",
+//     votes: 21,
+//     tags: ["Spring Boot", "Migration"],
+//   },
+//   {
+//     id: 4,
+//     title: "Pattern Matching Best Practices",
+//     description: "How to effectively use pattern matching for switch and instanceof in modern Java",
+//     author: "Thomas S.",
+//     votes: 15,
+//     tags: ["Java 21", "Language Features"],
+//   },
+//   {
+//     id: 5,
+//     title: "Kubernetes Operators in Java",
+//     description: "Building Kubernetes operators using the Java Operator SDK",
+//     author: "Julia W.",
+//     votes: 12,
+//     tags: ["Kubernetes", "Cloud Native"],
+//   },
+//   {
+//     id: 6,
+//     title: "AI/ML Integration with Java",
+//     description: "Integrating LLMs and ML models into Java applications using Langchain4j",
+//     author: "Felix R.",
+//     votes: 28,
+//     tags: ["AI/ML", "LLM"],
+//   },
+// ];
 
 export const Topics = () => {
   const { toast } = useToast();
-  const [topics, setTopics] = useState<Topic[]>(initialTopics);
+  const [topics, setTopics] = useState<Topic[]>([]);
   const [newTopicRequest, setNewTopicRequest] = useState({ title: "", description: "", name: "", categories: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [topicsFetched, setTopicsFetched] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+
+        const fetchTopics = async () => {
+          try {
+            const res = await fetch(`/api/topics/list`);
+
+            const data = await res.json();
+            console.log("data", data);
+
+            setTopics(data);
+          } catch {
+            setMessage("Network error");
+          }
+        };
+        if (!topicsFetched) {
+            fetchTopics();
+            setTopicsFetched(true);
+        }
+
+      }, [topicsFetched], );
+
 
   const handleVote = (id: number) => {
     setTopics(topics.map(topic => 
-      topic.id === id ? { ...topic, votes: topic.votes + 1 } : topic
-    ).sort((a, b) => b.votes - a.votes));
+      topic.id === id ? { ...topic, votes: topic.likes + 1 } : topic
+    ).sort((a, b) => b.likes - a.likes));
     
     toast({
       title: "Vote recorded! 👍",
@@ -246,7 +270,7 @@ export const Topics = () => {
                         size={20} 
                         className="text-muted-foreground group-hover:text-primary transition-colors" 
                       />
-                      <span className="text-lg font-bold mt-1">{topic.votes}</span>
+                      <span className="text-lg font-bold mt-1">{topic.likes}</span>
                     </button>
 
                     {/* Content */}
@@ -254,13 +278,13 @@ export const Topics = () => {
                       <h4 className="font-semibold text-lg mb-1">{topic.title}</h4>
                       <p className="text-sm text-muted-foreground mb-3">{topic.description}</p>
                       <div className="flex flex-wrap items-center gap-2">
-                        {topic.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
+
+                          <Badge key={topic.categories} variant="secondary" className="text-xs">
+                            {topic.categories}
                           </Badge>
-                        ))}
+
                         <span className="text-xs text-muted-foreground ml-auto">
-                          by {topic.author}
+                          by {topic.name}
                         </span>
                       </div>
                     </div>
