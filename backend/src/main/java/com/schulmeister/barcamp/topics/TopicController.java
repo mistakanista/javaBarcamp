@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("api/topics")
 @Slf4j
 @AllArgsConstructor
-public class TopoicController {
+public class TopicController {
 
     TopicService topicService;
 
@@ -28,5 +28,14 @@ public class TopoicController {
         List<Topic> topicList = topicService.findAllAccepted();
         log.info("Sponsors for level {}", topicList);
         return ResponseEntity.ok(topicList);
+    }
+
+    @GetMapping("/like")
+    public ResponseEntity<String> increaseLikes(
+            @RequestParam("id") Long id) {
+
+        String response = topicService.increaseLikes(id);
+        log.info(response);
+        return ResponseEntity.ok(response);
     }
 }
