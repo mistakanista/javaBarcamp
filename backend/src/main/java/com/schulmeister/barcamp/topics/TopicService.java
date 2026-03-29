@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +18,9 @@ public class TopicService {
 
     public static final String SAVED_SUCCESSFULLY = "Topic saved successfully: ";
     public static final String ERROR_SAVING = "Error saving topic: ";
+    public static final String TOPIC_NOT_FOUND = "A topic with this id could not be found: ";
+    public static final String LIKES_INCREASED = "Likes increased for topic: ";
+    public static final String TOTAL_LIKES = ". Total likes: ";
     private TopicRepository repository;
 
     public ResponseEntity<String> suggest(@RequestBody @Valid TopicRequest request) {
@@ -41,5 +45,17 @@ public class TopicService {
 
     public List<Topic> findAllAccepted() {
         return repository.findByAcceptedOrderByLikesDesc(true);
+    }
+
+    public String increaseLikes(Long id) {
+        String response = TOPIC_NOT_FOUND + id;
+        Optional<Topic> topicOptional = repository.findById(id);
+        if (topicOptional.isPresent()) {
+            Topic topic = topicOptional.get();
+            topic.setLikes(topic.getLikes() + 1);
+            repository.save(topic);
+            return LIKES_INCREASED + topic.getTitle() + TOTAL_LIKES + topic.getLikes();
+        }
+        return response;
     }
 }

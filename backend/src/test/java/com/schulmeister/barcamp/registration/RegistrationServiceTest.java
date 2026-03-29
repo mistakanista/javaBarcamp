@@ -84,7 +84,7 @@ class RegistrationServiceTest {
         registration.setConfirmedRegistration(false);
         registration.setEmail(email);
 
-        when(repository.findByConfirmationToken(token)).thenReturn((java.util.Optional.of(registration)));
+        when(repository.findByConfirmationToken(token)).thenReturn(java.util.Optional.of(registration));
         when(repository.save(org.mockito.ArgumentMatchers.any(Registration.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 

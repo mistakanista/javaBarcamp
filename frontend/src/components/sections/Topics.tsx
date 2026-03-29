@@ -85,30 +85,37 @@ export const Topics = () => {
 
   useEffect(() => {
 
-        const fetchTopics = async () => {
-          try {
-            const res = await fetch(`/api/topics/list`);
+    const fetchTopics = async () => {
+      try {
+        const res = await fetch(`/api/topics/list`);
 
-            const data = await res.json();
-            console.log("data", data);
+        const data = await res.json();
+        console.log("data", data);
 
-            setTopics(data);
+        setTopics(data);
+      } catch {
+        setMessage("Network error");
+      }
+    };
+    if (!topicsFetched) {
+        fetchTopics();
+        setTopicsFetched(true);
+    }
+
+  }, [topicsFetched], );
+
+
+  const handleVote = async (id: number) => {
+    try {
+            const res = await fetch(`/api/topics/like?id=${id}`);
+
+            const text = await res.text();
+            console.log("test", text)// Body auslesen
+            setMessage(text);
+            setTopicsFetched(false)
           } catch {
             setMessage("Network error");
           }
-        };
-        if (!topicsFetched) {
-            fetchTopics();
-            setTopicsFetched(true);
-        }
-
-      }, [topicsFetched], );
-
-
-  const handleVote = (id: number) => {
-    setTopics(topics.map(topic => 
-      topic.id === id ? { ...topic, votes: topic.likes + 1 } : topic
-    ).sort((a, b) => b.likes - a.likes));
     
     toast({
       title: "Vote recorded! 👍",
