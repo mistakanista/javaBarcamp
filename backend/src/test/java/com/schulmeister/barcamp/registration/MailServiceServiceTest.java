@@ -1,5 +1,6 @@
 package com.schulmeister.barcamp.registration;
 
+import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +15,8 @@ class MailServiceServiceTest {
 
     MailService mailService = new MailService(mailSender);
 
+    MimeMessage mimeMessage = mock(MimeMessage.class);
+
     String email = "test@test.de";
 
     @Test
@@ -24,9 +27,10 @@ class MailServiceServiceTest {
         registration.setConfirmationToken(token);
         registration.setConfirmedRegistration(false);
         registration.setEmail(email);
+        when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
         mailService.sendConfirmationMail(registration, true);
 
-        verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
+        verify(mailSender, times(1)).send(any(MimeMessage.class));
     }
 
     @Test
@@ -37,6 +41,7 @@ class MailServiceServiceTest {
         registration.setConfirmationToken(token);
         registration.setConfirmedRegistration(false);
         registration.setEmail(email);
+        when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
         mailService.sendConfirmationMail(registration, false);
 
         verify(mailSender, times(0)).send(any(SimpleMailMessage.class));
