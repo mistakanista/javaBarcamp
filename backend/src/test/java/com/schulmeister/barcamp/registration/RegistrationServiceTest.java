@@ -15,7 +15,9 @@ class RegistrationServiceTest {
 
     RegistrationRepository repository = mock(RegistrationRepository.class);
 
-    RegistrationService registrationService = new RegistrationService(repository);
+    MailService mailService = mock(MailService.class);
+
+    RegistrationService registrationService = new RegistrationService(repository, mailService);
 
     String email = "test@test.de";
 
@@ -67,7 +69,7 @@ class RegistrationServiceTest {
 
         ResponseEntity<String> responseEntity = registrationService.register(request);
         assertNotNull(responseEntity);
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_CONTENT, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
         assertNotNull(response);
         assertNotEquals("", response);
