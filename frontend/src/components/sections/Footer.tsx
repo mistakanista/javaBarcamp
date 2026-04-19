@@ -83,7 +83,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center">
           <p className="text-sm text-primary-foreground/50">
-            © {new Date().getFullYear()} Developer Barcamp Frankfurt. Made with ☕ and ❤️
+            © {new Date().getFullYear()} KI_Code_Camp Frankfurt. Made with ☕ and ❤️
           </p>
         </div>
       </div>
