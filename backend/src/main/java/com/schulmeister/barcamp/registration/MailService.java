@@ -27,10 +27,10 @@ public class MailService {
                 MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
                 helper.setTo(registration.getEmail());
-                helper.setSubject("Java Barcamp Frankfurt Registration");
+                helper.setSubject("Dev Barcamp Frankfurt Registration");
 
                 helper.setText("""
-                <h2>Please confirm your registration at the Java Barcamp in Frankfurt</h2>
+                <h2>Please confirm your registration at the Developer Barcamp in Frankfurt</h2>
                 <a href="%s">Click here to confirm</a>
                 """.formatted(confirmUrl), true);
 
