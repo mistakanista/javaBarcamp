@@ -27,6 +27,7 @@ public class RegistrationService {
     public static final String UNREGISTER_EMAIL_SENT = "An email has been sent to unregister to: ";
     public static final String UNREGISTER_SUCCESS = "Your registration has been successfully unregistered for email: ";
     private RegistrationRepository repository;
+    private MailService mailService;
 
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequest request) {
         String response;
@@ -49,10 +50,11 @@ public class RegistrationService {
         try {
             response = REGISTRATION_SUCCESSFUL + request.getEmail() + ". " + CONFIRMATION_TOKEN + " " + token;
             repository.save(registration);
+            mailService.sendConfirmationMail(registration, true);
         } catch (Exception e) {
             response = ERROR_SAVING + request.getEmail();
             log.error(response + " {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(response);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
