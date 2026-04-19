@@ -47,7 +47,7 @@ export const UnRegistration = () => {
     } else {
       toast({
         title: "Unregistration Successful! ☕",
-        description: "Please check your emails to complete the unregistration for Dev Camp Frankfurt 2026!",
+        description: "Please check your emails to complete the unregistration for KI_Code_Camp Frankfurt 2026!",
       });
     }
 
@@ -65,7 +65,7 @@ export const UnRegistration = () => {
               Unregister your spot
             </h2>
             <p className="text-muted-foreground">
-              Please enter your email address to unregister from DevCamp Frankfurt 2026.
+              Please enter your email address to unregister from KI_Code_Camp Frankfurt 2026.
             </p>
           </div>
 

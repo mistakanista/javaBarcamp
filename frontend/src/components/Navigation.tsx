@@ -32,7 +32,7 @@ export const Navigation = () => {
           <a href="#" className={`flex items-center gap-2.5 ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}>
             <Code2 className="text-primary" size={24} />
             <span className="font-semibold text-base font-mono tracking-tight hidden sm:inline">
-              DevBarcamp FFM
+              KI_Code_Camp FFM
             </span>
           </a>
 

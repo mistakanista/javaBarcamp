@@ -116,7 +116,7 @@ export const Sponsors = () => {
         <div className="pt-4 text-center">
           <p className="text-sm text-muted-foreground">
             Want to support the developer community?{" "}
-            <a href="mailto:sponsors@devbarcamp-frankfurt.de" className="text-primary hover:underline">
+            <a href="mailto:sponsors@kicodecamp-frankfurt.de" className="text-primary hover:underline">
               Become a sponsor →
             </a>
           </p>

@@ -7,9 +7,9 @@ console.log("test",test);
 export const Hero = () => {
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden flex items-center">
-      {/* Repeating </> pattern */}
-      <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='monospace' font-size='14' font-weight='bold' fill='%23ffffff' opacity='0.09'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E")`,
+      {/* Repeating AI / {} / </> / ML pattern */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg font-family='monospace' font-weight='bold' fill='%23ffffff' opacity='0.07'%3E%3Ctext x='25' y='30' text-anchor='middle' font-size='13'%3EAI%3C/text%3E%3Ctext x='75' y='30' text-anchor='middle' font-size='14'%3E%7B%7D%3C/text%3E%3Ctext x='25' y='80' text-anchor='middle' font-size='14'%3E%26lt;/%26gt;%3C/text%3E%3Ctext x='75' y='80' text-anchor='middle' font-size='13'%3EML%3C/text%3E%3C/g%3E%3C/svg%3E")`,
       }} />
 
       <div className="relative section-container py-32">
@@ -21,9 +21,7 @@ export const Hero = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-[1.1] tracking-tight animate-slide-up">
-            Developer
-            <br />
-            Barcamp
+            KI_Code_Camp
             <span className="text-primary"> Frankfurt</span>
             <br />
             <span className="font-mono text-3xl md:text-5xl font-light text-primary-foreground/60">

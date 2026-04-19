@@ -9,10 +9,10 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="text-primary" size={28} />
-              <span className="text-xl font-bold">Developer Barcamp Frankfurt</span>
+              <span className="text-xl font-bold">KI_Code_Camp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              The premier Developer unconference in Frankfurt am Main.
+              The premier AI developer unconference in Frankfurt am Main.
               By the community, for the community.
             </p>
           </div>
@@ -75,7 +75,7 @@ export const Footer = () => {
               </a>
             </div>
             <p className="text-sm text-primary-foreground/70">
-              info@devcamp-frankfurt.de
+              info@kicodecamp-frankfurt.de
             </p>
           </div>
         </div>
