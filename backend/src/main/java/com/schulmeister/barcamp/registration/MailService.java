@@ -1,12 +1,16 @@
 package com.schulmeister.barcamp.registration;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class MailService {
 
     private final JavaMailSender mailSender;
@@ -18,23 +22,26 @@ public class MailService {
         if (!registration.isConfirmedRegistration()) {
             String confirmUrl = BASE_URL + "confirm?token=" + registration.getConfirmationToken();
 
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(registration.getEmail());
-            message.setSubject("Confirm your registration");
+            try {
+                MimeMessage message = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            message.setText("""
-                Hi,
+                helper.setTo(registration.getEmail());
+                helper.setSubject("Java Barcamp Frankfurt Registration");
 
-                please confirm your registration:
+                helper.setText("""
+                <h2>Please confirm your registration at the Java Barcamp in Frankfurt</h2>
+                <a href="%s">Click here to confirm</a>
+                """.formatted(confirmUrl), true);
 
-                %s
+                if (sendMail) {
+                    mailSender.send(message);
+                }
 
-                Best regards
-                Java Barcamp
-                """.formatted(confirmUrl));
-            if (sendMail) {
-                mailSender.send(message);
+            } catch (MessagingException e) {
+                log.error("Error sending confirmation email to {}, {}", registration.getEmail(), e.getMessage());
             }
+
 
         }
 
