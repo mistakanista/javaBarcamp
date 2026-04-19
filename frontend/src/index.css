@@ -48,15 +48,7 @@
     --silver-light: 25 15% 90%;
 
     /* Gradients */
-    --hero-start: 0, 0%, 43.5%;
-    --hero-end: 0, 0%, 78%;
-
-
-    --gradient-hero: linear-gradient(
-      160deg,
-      hsl(var(--hero-start)) 0%,
-      hsl(var(--hero-end)) 100%
-    );
+    --gradient-hero: linear-gradient(160deg, hsl(20 30% 12%) 0%, hsl(345 40% 22%) 100%);
     --gradient-primary: linear-gradient(135deg, hsl(345 60% 40%) 0%, hsl(345 70% 32%) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(38 80% 50%) 0%, hsl(30 75% 55%) 100%);
     --gradient-silver: linear-gradient(135deg, hsl(20 10% 55%) 0%, hsl(20 15% 68%) 100%);
