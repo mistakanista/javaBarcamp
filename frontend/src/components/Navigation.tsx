@@ -3,10 +3,10 @@ import { Coffee, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { href: "#register", label: "Register" },
-  { href: "#sponsors", label: "Sponsors" },
-  { href: "#topics", label: "Topics" },
-  { href: "#schedule", label: "Schedule" },
+    { href: "/#register", label: "Register" },
+    { href: "/#sponsors", label: "Sponsors" },
+    { href: "/#topics", label: "Topics" },
+    { href: "/#schedule", label: "Schedule" },
 ];
 
 export const Navigation = () => {
