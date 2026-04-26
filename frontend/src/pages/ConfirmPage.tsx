@@ -1,3 +1,6 @@
+import { ScrollToHash } from "@/components/ScrollToHash";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/sections/Footer";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -28,15 +31,20 @@ export default function ConfirmPage() {
   }, [token]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Confirmation</h1>
-        {status !== null && <p className="mb-4 text-xl text-muted-foreground">Status: {status}</p>}
-        <p className="mb-4 text-xl text-muted-foreground">{message}</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen code-pattern-bg">
+        <ScrollToHash />
+        <Navigation /><div className="flex min-h-screen items-center justify-center bg-muted">
+        <div className="text-center">
+              <h1 className="mb-4 text-4xl font-bold">Confirmation</h1>
+              {status !== null && <p className="mb-4 text-xl text-muted-foreground">Status: {status}</p>}
+              <p className="mb-4 text-xl text-muted-foreground">{message}</p>
+              <a href="/" className="text-primary underline hover:text-primary/90">
+                Return to Home
+              </a>
+            </div>
+        </div>
+        <Footer />
     </div>
+
   );
 }

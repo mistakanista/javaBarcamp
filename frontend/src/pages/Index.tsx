@@ -1,3 +1,4 @@
+import { ScrollToHash } from "@/components/ScrollToHash";
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/sections/Hero";
 import { Registration } from "@/components/sections/Registration";
@@ -9,6 +10,7 @@ import { Footer } from "@/components/sections/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen code-pattern-bg">
+      <ScrollToHash />
       <Navigation />
       <Hero />
       <Registration />
