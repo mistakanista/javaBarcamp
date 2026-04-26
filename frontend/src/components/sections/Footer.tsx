@@ -27,13 +27,13 @@ export const Footer = () => {
               <a href="/unregister" className="block text-primary-foreground/70 hover:text-primary transition-colors">
                 Unregister
               </a>
-              <a href="#sponsors" className="block text-primary-foreground/70 hover:text-primary transition-colors">
+              <a href="/#sponsors" className="block text-primary-foreground/70 hover:text-primary transition-colors">
                 Sponsors
               </a>
-              <a href="#topics" className="block text-primary-foreground/70 hover:text-primary transition-colors">
+               <a href="/#topics" className="block text-primary-foreground/70 hover:text-primary transition-colors">
                 Topics
               </a>
-              <a href="#schedule" className="block text-primary-foreground/70 hover:text-primary transition-colors">
+              <a href="/#schedule" className="block text-primary-foreground/70 hover:text-primary transition-colors">
                 Schedule
               </a>
             </nav>
