@@ -12,6 +12,8 @@ services:
 
   backend:
     build: ./backend
+    environment:
+      - BASIC_AUTH_PW=${BASIC_AUTH_PW}
     env_file:
       - .env
     ports:
