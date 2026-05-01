@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Crown, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Sponsors = () => {
 
+  const { t } = useTranslation();
   const [message, setMessage] = useState<string>("");
   const [goldSponsors, setGoldSponsors] = useState([]);
   const [goldSponsorsFetched, setGoldSponsorsFetched] = useState(false);
@@ -55,7 +57,7 @@ export const Sponsors = () => {
       <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Our Sponsors
+            {t("sponsors")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Thanks to our amazing sponsors who make this event possible

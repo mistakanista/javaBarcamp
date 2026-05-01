@@ -6,9 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { User, Mail, Building, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Registration = () => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -22,8 +24,8 @@ export const Registration = () => {
     
     if (!formData.name.trim() || !formData.email.trim()) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in your name and email.",
+        title: t("missingInformation"),
+        description: t("emailMissing"),
         variant: "destructive",
       });
       return;
@@ -31,8 +33,8 @@ export const Registration = () => {
 
     if (!formData.agreeTerms) {
       toast({
-        title: "Terms Required",
-        description: "Please agree to the terms to register.",
+        title: t("termsRequired"),
+        description: t("agreeTerms"),
         variant: "destructive",
       });
       return;
@@ -55,20 +57,20 @@ export const Registration = () => {
     console.log("resp", response);
     if (response.status === 409) {
       toast({
-        title: "Already registered",
-        description: "This email is already registered.",
+        title: t("alreadyRegistered"),
+        description: t("emailRegistered"),
         variant: "destructive",
       });
     } else if (response.status >= 400) {
       toast({
-        title: "Registration failed",
-        description: "There was an error when trying to register.",
+        title: t("registrationFailed"),
+        description: t("registrationError"),
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Registration Successful! ☕",
-        description: "Please check your emails to complete the registration for Java Barcamp Frankfurt 2026!",
+        title: t("registrationSuccess"),
+        description: t("checkEmail"),
       });
     }
 
@@ -82,10 +84,10 @@ export const Registration = () => {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Join the Community
+              {t("join")}
             </h2>
             <p className="text-lg text-muted-foreground">
-              Reserve your spot at Frankfurt's premier Java unconference
+              {t("reserve")}
             </p>
           </div>
 
@@ -93,10 +95,10 @@ export const Registration = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="text-primary" />
-                Registration Form
+                {t("registrationForm")}
               </CardTitle>
               <CardDescription>
-                Fill in your details to secure your spot. It's free!
+                {t("formDetails")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -104,11 +106,11 @@ export const Registration = () => {
                 <div className="space-y-2">
                   <Label htmlFor="name" className="flex items-center gap-2">
                     <User size={16} />
-                    Full Name *
+                    {t("name")} *
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Your name"
+                    placeholder={t('yourName')}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="h-12"
@@ -118,7 +120,7 @@ export const Registration = () => {
                 <div className="space-y-2">
                   <Label htmlFor="email" className="flex items-center gap-2">
                     <Mail size={16} />
-                    Email Address *
+                    {t("email")} *
                   </Label>
                   <Input
                     id="email"
@@ -133,11 +135,11 @@ export const Registration = () => {
                 <div className="space-y-2">
                   <Label htmlFor="company" className="flex items-center gap-2">
                     <Building size={16} />
-                    Company (Optional)
+                    {t("company")}
                   </Label>
                   <Input
                     id="company"
-                    placeholder="Your Company"
+                    placeholder={t("yourCompany")}
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     className="h-12"
@@ -151,7 +153,7 @@ export const Registration = () => {
                     onCheckedChange={(checked) => setFormData({ ...formData, agreeTerms: checked as boolean })}
                   />
                   <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                    I agree to participate in the barcamp and understand that session topics are proposed on the day of the event.
+                    {t("terms")}
                   </Label>
                 </div>
 
@@ -167,7 +169,7 @@ export const Registration = () => {
                   ) : (
                     <>
                       <CheckCircle size={18} />
-                      Complete Registration
+                      {t("completeRegistration")}
                     </>
                   )}
                 </Button>

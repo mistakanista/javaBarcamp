@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Coffee, Calendar, MapPin, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Hero = () => {
+
+  const { t } = useTranslation();
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden">
       {/* Background Pattern */}
@@ -24,7 +27,7 @@ export const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in">
             <Coffee size={16} />
-            <span>The Ultimate Java Unconference</span>
+            <span>{t('ultimative')}</span>
           </div>
 
           {/* Title */}
@@ -35,14 +38,14 @@ export const Hero = () => {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-primary-foreground/80 mb-12 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Where Java developers brew ideas, share knowledge, and build community together.
+            {t('brew')}
           </p>
 
           {/* Event Details */}
           <div className="flex flex-wrap justify-center gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <Calendar className="text-primary" size={20} />
-              <span>October 17, 2026</span>
+              <span>{t('date')}</span>
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <MapPin className="text-primary" size={20} />
@@ -50,17 +53,17 @@ export const Hero = () => {
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/90">
               <Users className="text-primary" size={20} />
-              <span>100 Developers</span>
+              <span>{t('developer')}</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <Button variant="hero" size="xl" onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}>
-              Register Now
+              {t('registerNow')}
             </Button>
             <Button variant="hero-outline" size="xl" onClick={() => document.getElementById('topics')?.scrollIntoView({ behavior: 'smooth' })}>
-              Suggest a Topic
+              {t('suggestTopic')}
             </Button>
           </div>
         </div>

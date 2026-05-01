@@ -1,17 +1,28 @@
 import { useState, useEffect } from "react";
 import { Coffee, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
-const navLinks = [
-    { href: "/#register", label: "Register" },
-    { href: "/#sponsors", label: "Sponsors" },
-    { href: "/#topics", label: "Topics" },
-    { href: "/#schedule", label: "Schedule" },
-];
+
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { i18n, t } = useTranslation();
+  const currentLang = i18n.language;
+
+  const navLinks = [
+      { href: "/#register", label: t('register') },
+      { href: "/#sponsors", label: t('sponsors') },
+      { href: "/#topics", label: t('topics') },
+      { href: "/#schedule", label: t('schedule') },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,9 +65,32 @@ export const Navigation = () => {
               size="sm"
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Register Now
+              {t("registerNow")}
             </Button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary-foreground/80"
+                >
+                  {currentLang.toUpperCase()}
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => i18n.changeLanguage("de")}>
+                  🇩🇪 Deutsch
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => i18n.changeLanguage("en")}>
+                  🇬🇧 English
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
           </div>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -65,6 +99,7 @@ export const Navigation = () => {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+
         </div>
 
         {/* Mobile Navigation */}
@@ -75,7 +110,7 @@ export const Navigation = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-primary-foreground/80 hover:text-primary transition-colors font-medium py-2"
+                  className="block text-primary-foreground/80 hover:text-primary transition-colors font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -89,8 +124,28 @@ export const Navigation = () => {
                   document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Register Now
+                {t("registerNow")}
               </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary-foreground/80"
+                  >
+                    {currentLang.toUpperCase()}
+                  </Button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => i18n.changeLanguage("de")}>
+                    🇩🇪 Deutsch
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => i18n.changeLanguage("en")}>
+                    🇬🇧 English
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         )}
