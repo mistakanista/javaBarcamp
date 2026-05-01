@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnRegister from "./pages/UnregisterPage";
 import AddSponsor from "./pages/Sponsors";
+import "./i18n";
 
 const queryClient = new QueryClient();
 
