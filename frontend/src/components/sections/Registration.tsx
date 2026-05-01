@@ -5,10 +5,12 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Building, ArrowRight } from "lucide-react";
+import { User, Mail, Building, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Registration = () => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -19,11 +21,11 @@ export const Registration = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!formData.name.trim() || !formData.email.trim()) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in your name and email.",
+        title: t("missingInformation"),
+        description: t("emailMissing"),
         variant: "destructive",
       });
       return;
@@ -31,15 +33,14 @@ export const Registration = () => {
 
     if (!formData.agreeTerms) {
       toast({
-        title: "Terms Required",
-        description: "Please agree to the terms to register.",
+        title: t("termsRequired"),
+        description: t("agreeTerms"),
         variant: "destructive",
       });
       return;
     }
 
     setIsSubmitting(true);
-
 
     const response = await fetch("/api/registrations", {
       method: "POST",
@@ -56,20 +57,20 @@ export const Registration = () => {
     console.log("resp", response);
     if (response.status === 409) {
       toast({
-        title: "Already registered",
-        description: "This email is already registered.",
+        title: t("alreadyRegistered"),
+        description: t("emailRegistered"),
         variant: "destructive",
       });
     } else if (response.status >= 400) {
       toast({
-        title: "Registration failed",
-        description: "There was an error when trying to register.",
+        title: t("registrationFailed"),
+        description: t("registrationError"),
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Registration Successful! ☕",
-        description: "Please check your emails to complete the registration for Java Barcamp Frankfurt 2026!",
+        title: t("registrationSuccess"),
+        description: t("checkEmail"),
       });
     }
 
@@ -78,86 +79,97 @@ export const Registration = () => {
   };
 
   return (
-    <section id="register" className="py-24 mesh-bg">
+    <section id="register" className="py-24 bg-muted/50">
       <div className="section-container">
-        <div className="max-w-lg mx-auto">
-          <div className="mb-10">
-            <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Registration</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
-              Grab your spot
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t("join")}
             </h2>
-            <p className="text-muted-foreground">
-              Free entry. Limited to 100 participants.
+            <p className="text-lg text-muted-foreground">
+              {t("reserve")}
             </p>
           </div>
 
-          <Card className="border border-border shadow-sm">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-base">Your details</CardTitle>
-              <CardDescription className="text-sm">
-                We'll send a confirmation to your email.
+          <Card className="glass-card shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="text-primary" />
+                {t("registrationForm")}
+              </CardTitle>
+              <CardDescription>
+                {t("formDetails")}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-sm flex items-center gap-1.5">
-                    <User size={14} className="text-muted-foreground" />
-                    Full Name
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="flex items-center gap-2">
+                    <User size={16} />
+                    {t("name")} *
                   </Label>
                   <Input
                     id="name"
-                    placeholder="Jane Developer"
+                    placeholder={t('yourName')}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="h-12"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="email" className="text-sm flex items-center gap-1.5">
-                    <Mail size={14} className="text-muted-foreground" />
-                    Email
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="flex items-center gap-2">
+                    <Mail size={16} />
+                    {t("email")} *
                   </Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="jane@example.com"
+                    placeholder="max@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="h-12"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="company" className="text-sm flex items-center gap-1.5">
-                    <Building size={14} className="text-muted-foreground" />
-                    Company
-                    <span className="text-muted-foreground font-normal">— optional</span>
+                <div className="space-y-2">
+                  <Label htmlFor="company" className="flex items-center gap-2">
+                    <Building size={16} />
+                    {t("company")}
                   </Label>
                   <Input
                     id="company"
-                    placeholder="Acme Inc."
+                    placeholder={t("yourCompany")}
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="h-12"
                   />
                 </div>
 
-                <div className="flex items-start space-x-2.5 pt-1">
+                <div className="flex items-start space-x-3">
                   <Checkbox
                     id="terms"
                     checked={formData.agreeTerms}
                     onCheckedChange={(checked) => setFormData({ ...formData, agreeTerms: checked as boolean })}
-                    className="mt-0.5"
                   />
-                  <Label htmlFor="terms" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
-                    I understand this is an unconference — session topics are proposed on the day by participants.
+                  <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                    {t("terms")}
                   </Label>
                 </div>
 
-                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Registering…" : (
+                <Button 
+                  type="submit" 
+                  variant="hero" 
+                  size="lg" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>Processing...</>
+                  ) : (
                     <>
-                      Complete Registration
-                      <ArrowRight size={16} />
+                      <CheckCircle size={18} />
+                      {t("completeRegistration")}
                     </>
                   )}
                 </Button>

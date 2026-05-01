@@ -1,79 +1,78 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Users, ArrowRight } from "lucide-react";
+import { Coffee, Calendar, MapPin, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const test = decodeURIComponent("%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='monospace' font-size='14' font-weight='bold' fill='%23ffffff' opacity='0.09'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E")
-
-console.log("test",test);
 export const Hero = () => {
-  return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden flex items-center">
-      {/* Repeating </> pattern */}
-      <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ctext x='25' y='30' text-anchor='middle' font-family='monospace' font-size='14' font-weight='bold' fill='%23ffffff' opacity='0.09'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E")`,
-      }} />
 
-      <div className="relative section-container py-32">
-        <div className="max-w-3xl">
-          {/* Tag */}
-          <div className="inline-flex items-center gap-2 bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground/80 px-3 py-1.5 rounded-full text-xs font-mono mb-8 animate-fade-in">
-            <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-            <span>Software Developer Unconference</span>
+  const { t } = useTranslation();
+  return (
+    <section className="relative min-h-screen hero-gradient overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      {/* Floating Coffee Beans */}
+      <div className="absolute top-20 left-10 text-primary/20 animate-float">
+        <Coffee size={80} />
+      </div>
+      <div className="absolute bottom-32 right-16 text-primary/15 animate-float" style={{ animationDelay: '2s' }}>
+        <Coffee size={60} />
+      </div>
+
+      <div className="relative section-container pt-32 pb-20">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in">
+            <Coffee size={16} />
+            <span>{t('ultimative')}</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-[1.1] tracking-tight animate-slide-up">
-            Developer
-            <br />
-            Barcamp
-            <span className="text-primary"> Frankfurt</span>
-            <br />
-            <span className="font-mono text-3xl md:text-5xl font-light text-primary-foreground/60">
-              2026
-            </span>
+          {/* Title */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-primary-foreground mb-6 animate-slide-up">
+            Java Barcamp
+            <span className="block">FFM 2026</span>
           </h1>
 
-          <p className="text-lg text-primary-foreground/60 mb-10 max-w-xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            An open space for developers to share ideas, learn from peers, and shape the agenda together. No speakers, no spectators — just participants.
+          {/* Subtitle */}
+          <p className="text-xl md:text-2xl text-primary-foreground/80 mb-12 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            {t('brew')}
           </p>
 
-          {/* Meta */}
-          <div className="flex flex-wrap gap-6 mb-10 animate-slide-up" style={{ animationDelay: "0.15s" }}>
-            {[
-              { icon: Calendar, text: "October 15, 2026" },
-              { icon: MapPin, text: "Frankfurt am Main" },
-              { icon: Users, text: "100 Developers" },
-            ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2 text-primary-foreground/50 text-sm">
-                <Icon size={16} className="text-primary/70" />
-                <span>{text}</span>
-              </div>
-            ))}
+          {/* Event Details */}
+          <div className="flex flex-wrap justify-center gap-6 mb-12 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="flex items-center gap-2 text-primary-foreground/90">
+              <Calendar className="text-primary" size={20} />
+              <span>{t('date')}</span>
+            </div>
+            <div className="flex items-center gap-2 text-primary-foreground/90">
+              <MapPin className="text-primary" size={20} />
+              <span>Frankfurt am Main</span>
+            </div>
+            <div className="flex items-center gap-2 text-primary-foreground/90">
+              <Users className="text-primary" size={20} />
+              <span>{t('developer')}</span>
+            </div>
           </div>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <Button
-              variant="hero"
-              size="xl"
-              onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Register Now
-              <ArrowRight size={18} />
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <Button variant="hero" size="xl" onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}>
+              {t('registerNow')}
             </Button>
-            <Button
-              variant="hero-outline"
-              size="xl"
-              onClick={() => document.getElementById("topics")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Suggest a Topic
+            <Button variant="hero-outline" size="xl" onClick={() => document.getElementById('topics')?.scrollIntoView({ behavior: 'smooth' })}>
+              {t('suggestTopic')}
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-5 h-8 border border-primary-foreground/20 rounded-full flex justify-center pt-1.5">
-          <div className="w-1 h-2 bg-primary/60 rounded-full" />
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center pt-2">
+            <div className="w-1.5 h-3 bg-primary rounded-full" />
+          </div>
         </div>
       </div>
     </section>

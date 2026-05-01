@@ -1,9 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Crown, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Sponsors = () => {
 
+  const { t } = useTranslation();
   const [message, setMessage] = useState<string>("");
   const [goldSponsors, setGoldSponsors] = useState([]);
   const [goldSponsorsFetched, setGoldSponsorsFetched] = useState(false);
@@ -51,23 +53,22 @@ export const Sponsors = () => {
     }, [goldSponsorsFetched, silverSponsorsFetched], );
 
   return (
-    <section id="sponsors" className="py-24 bg-muted/30">
+    <section id="sponsors" className="py-24 bg-background">
       <div className="section-container">
         <div className="text-center mb-16">
-          <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Partners</p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
-            Our Sponsors
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            {t("sponsors")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Made possible by companies that care about the developer community.
+            Thanks to our amazing sponsors who make this event possible
           </p>
         </div>
 
-        {/* Gold */}
-        <div className="mb-14">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Crown className="text-gold" size={18} />
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gold">Gold</h3>
+        {/* Gold Sponsors */}
+        <div className="mb-16">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <Crown className="text-gold" size={28} />
+            <h3 className="text-2xl font-bold">Gold Sponsors</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {goldSponsors.map((sponsor) => (
@@ -86,11 +87,11 @@ export const Sponsors = () => {
           </div>
         </div>
 
-        {/* Silver */}
-        <div className="mb-14">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <Award className="text-silver" size={18} />
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-silver">Silver</h3>
+        {/* Silver Sponsors */}
+        <div>
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <Award className="text-silver" size={24} />
+            <h3 className="text-xl font-bold text-muted-foreground">Silver Sponsors</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {silverSponsors.map((sponsor) => (
@@ -113,13 +114,17 @@ export const Sponsors = () => {
           </div>
         </div>
 
-        <div className="pt-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            Want to support the developer community?{" "}
-            <a href="mailto:sponsors@devbarcamp-frankfurt.de" className="text-primary hover:underline">
-              Become a sponsor →
-            </a>
+        {/* Become a Sponsor CTA */}
+        <div className="mt-16 text-center">
+          <p className="text-muted-foreground mb-4">
+            Interested in sponsoring Java Barcamp Frankfurt?
           </p>
+          <a
+            href="mailto:sponsors@javabarcamp-frankfurt.de"
+            className="text-primary font-semibold hover:underline"
+          >
+            Contact us for sponsorship opportunities →
+          </a>
         </div>
       </div>
     </section>
