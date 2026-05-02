@@ -6,34 +6,27 @@ export const Hero = () => {
 
   const { t } = useTranslation();
   return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+    <section className="relative min-h-screen hero-gradient overflow-hidden flex items-center">
+      {/* Repeating AI / {} / </> / ML pattern */}
         <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg font-family='monospace' font-weight='bold' fill='%23ffffff' opacity='0.07'%3E%3Ctext x='25' y='30' text-anchor='middle' font-size='13'%3EAI%3C/text%3E%3Ctext x='75' y='30' text-anchor='middle' font-size='14'%3E%7B%7D%3C/text%3E%3Ctext x='25' y='80' text-anchor='middle' font-size='14'%3E%26lt;/%26gt;%3C/text%3E%3Ctext x='75' y='80' text-anchor='middle' font-size='13'%3EML%3C/text%3E%3C/g%3E%3C/svg%3E")`,
+      }} />
 
-      {/* Floating Coffee Beans */}
-      <div className="absolute top-20 left-10 text-primary/20 animate-float">
-        <Coffee size={80} />
-      </div>
-      <div className="absolute bottom-32 right-16 text-primary/15 animate-float" style={{ animationDelay: '2s' }}>
-        <Coffee size={60} />
-      </div>
-
-      <div className="relative section-container pt-32 pb-20">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in">
-            <Coffee size={16} />
-            <span>{t('ultimative')}</span>
+      <div className="relative section-container py-32">
+        <div className="max-w-3xl">
+          {/* Tag */}
+          <div className="inline-flex items-center gap-2 bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground/80 px-3 py-1.5 rounded-full text-xs font-mono mb-8 animate-fade-in">
+            <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+            <span>{t("ultimative")}</span>
           </div>
 
-          {/* Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-primary-foreground mb-6 animate-slide-up">
-            Java Barcamp
-            <span className="block">FFM 2026</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-[1.1] tracking-tight animate-slide-up">
+            KI_Code_Camp
+            <span className="text-primary"> Frankfurt</span>
+            <br />
+            <span className="font-mono text-3xl md:text-5xl font-light text-primary-foreground/60">
+              2026
+            </span>
           </h1>
 
           {/* Subtitle */}
