@@ -45,4 +45,9 @@ public class TopicController {
         log.info(response);
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/accept")
+    public ResponseEntity<String> update(@RequestBody @Valid TopicUpdateRequest request) {
+        return topicService.acceptTopic(request);
+    }
 }

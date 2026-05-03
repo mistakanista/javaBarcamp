@@ -47,7 +47,7 @@ class TopicServiceTest {
 
         ResponseEntity<String> responseEntity = topicService.suggest(request);
         assertNotNull(responseEntity);
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_CONTENT, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
         assertNotNull(response);
         assertNotEquals("", response);
@@ -83,6 +83,45 @@ class TopicServiceTest {
         assertTrue(response.contains(TOPIC_NOT_FOUND + topic.getId()));
     }
 
+    @Test
+    void acceptTopic() {
+
+        Topic topic = getTopic();
+        TopicUpdateRequest topicUpdateRequest = getTopicUpdateRequest(topic);
+        when(repository.findById(topic.getId())).thenReturn(java.util.Optional.of(topic));
+
+        when(repository.save(org.mockito.ArgumentMatchers.any(Topic.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        ResponseEntity<String> responseEntity = topicService.acceptTopic(topicUpdateRequest);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        String response =responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(ACCEPTED_SUCCESSFULLY));
+        assertTrue(response.contains(title));
+    }
+
+    @Test
+    void topicNotFound() {
+
+        Topic topic = getTopic();
+        TopicUpdateRequest topicUpdateRequest = getTopicUpdateRequest(topic);
+        when(repository.findById(topic.getId())).thenReturn(java.util.Optional.empty());
+
+        ResponseEntity<String> responseEntity = topicService.acceptTopic(topicUpdateRequest);
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        String response =responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(TOPIC_NOT_FOUND));
+        assertTrue(response.contains(topic.getId().toString()));
+    }
+
+
+
 
 
     private TopicRequest getTopicRequest() {
@@ -91,6 +130,16 @@ class TopicServiceTest {
                 .title(title)
                 .description("here is the description")
                 .categories("Java, Migration")
+                .build();
+    }
+
+    private TopicUpdateRequest getTopicUpdateRequest(Topic topic) {
+        return TopicUpdateRequest.builder()
+                .id(topic.getId())
+                .name(topic.getName())
+                .title(topic.getTitle())
+                .description(topic.getDescription())
+                .categories(topic.getCategories())
                 .build();
     }
 
