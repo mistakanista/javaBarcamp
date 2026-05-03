@@ -17,6 +17,7 @@ import java.util.Optional;
 public class TopicService {
 
     public static final String SAVED_SUCCESSFULLY = "Topic saved successfully: ";
+    public static final String ACCEPTED_SUCCESSFULLY = "Topic accepted successfully: ";
     public static final String ERROR_SAVING = "Error saving topic: ";
     public static final String TOPIC_NOT_FOUND = "A topic with this id could not be found: ";
     public static final String LIKES_INCREASED = "Likes increased for topic: ";
@@ -61,5 +62,29 @@ public class TopicService {
             return LIKES_INCREASED + topic.getTitle() + TOTAL_LIKES + topic.getLikes();
         }
         return response;
+    }
+
+    public ResponseEntity<String> acceptTopic(@Valid TopicUpdateRequest request) {
+        String response = TOPIC_NOT_FOUND + request.getId();
+        Optional<Topic> topicOptional = repository.findById(request.getId());
+        if (topicOptional.isPresent()) {
+            Topic topic = topicOptional.get();
+            topic.setTitle(request.getTitle());
+            topic.setDescription(request.getDescription());
+            topic.setCategories(request.getCategories());
+            topic.setName(request.getName());
+            topic.setAccepted(true);
+            try {
+                response = ACCEPTED_SUCCESSFULLY + request.getTitle();
+                repository.save(topic);
+            } catch (Exception e) {
+                response = ERROR_SAVING + request.getTitle();
+                log.error(response + " {}", e.getMessage());
+                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(response);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 }
