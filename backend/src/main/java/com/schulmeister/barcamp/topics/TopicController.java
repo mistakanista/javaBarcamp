@@ -50,4 +50,9 @@ public class TopicController {
     public ResponseEntity<String> update(@RequestBody @Valid TopicUpdateRequest request) {
         return topicService.acceptTopic(request);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return topicService.deleteTopic(id);
+    }
 }

@@ -23,7 +23,7 @@ export const AddSponsor = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name.trim() || !formData.email.trim()) {
       toast({
         title: "Missing Information",
@@ -52,7 +52,7 @@ export const AddSponsor = () => {
         }
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     const response = await fetch("/api/sponsors", {
       method: "POST",
@@ -207,10 +207,10 @@ export const AddSponsor = () => {
                 </div>
 
 
-                <Button 
-                  type="submit" 
-                  variant="hero" 
-                  size="lg" 
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
                   className="w-full"
                   disabled={isSubmitting}
                 >
