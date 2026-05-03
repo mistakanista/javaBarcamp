@@ -38,13 +38,17 @@ public class TopicService {
         } catch (Exception e) {
             response = ERROR_SAVING + request.getTitle();
             log.error(response + " {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(response);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     public List<Topic> findAllAccepted() {
         return repository.findByAcceptedOrderByLikesDesc(true);
+    }
+
+    public List<Topic> findAllUnaccepted() {
+        return repository.findByAcceptedOrderByLikesDesc(false);
     }
 
     public String increaseLikes(Long id) {
