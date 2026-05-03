@@ -120,9 +120,23 @@ class TopicServiceTest {
         assertTrue(response.contains(topic.getId().toString()));
     }
 
+    @Test
+    void deleteTopic() {
 
+        Topic topic = getTopic();
+        when(repository.findById(topic.getId())).thenReturn(java.util.Optional.of(topic));
+        when(repository.save(org.mockito.ArgumentMatchers.any(Topic.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
 
-
+        ResponseEntity<String> responseEntity = topicService.deleteTopic(topic.getId());
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        String response =responseEntity.getBody();
+        assertNotNull(response);
+        assertNotEquals("", response);
+        assertTrue(response.contains(DELETED_SUCCESSFULLY));
+        assertTrue(response.contains(topic.getTitle()));
+    }
 
     private TopicRequest getTopicRequest() {
         return TopicRequest.builder()
