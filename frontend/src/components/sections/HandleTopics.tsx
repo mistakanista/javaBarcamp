@@ -17,7 +17,14 @@ interface Topic {
   categories: string;
 }
 
-export const Topics = () => {
+interface TopicRequest {
+  title: string;
+  description: string;
+  name: string;
+  categories: string;
+}
+
+export const HandleTopics = () => {
   const { toast } = useToast();
   const [topics, setTopics] = useState<Topic[]>([]);
   const [newTopicRequest, setNewTopicRequest] = useState({ title: "", description: "", name: "", categories: "" });
@@ -29,7 +36,7 @@ export const Topics = () => {
 
     const fetchTopics = async () => {
       try {
-        const res = await fetch(`/api/topics/list`);
+        const res = await fetch(`/api/topics/listUnaccepted`);
 
         const data = await res.json();
         console.log("data", data);

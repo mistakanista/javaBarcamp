@@ -26,7 +26,14 @@ public class TopicController {
     public ResponseEntity<List<Topic>> findAllAccepted() {
 
         List<Topic> topicList = topicService.findAllAccepted();
-        log.info("Sponsors for level {}", topicList);
+        log.info("Accepted topics {}", topicList);
+        return ResponseEntity.ok(topicList);
+    }
+
+    @GetMapping("/listUnaccepted")
+    public ResponseEntity<List<Topic>> findAllNotAccepted() {
+        List<Topic> topicList = topicService.findAllUnaccepted();
+        log.info("Unaccepted topics {}", topicList);
         return ResponseEntity.ok(topicList);
     }
 
