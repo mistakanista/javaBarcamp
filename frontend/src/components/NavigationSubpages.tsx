@@ -46,7 +46,7 @@ export const NavigationSubpages = () => {
           <a href="#" className={`flex items-center gap-2.5 text-foreground"`}>
             <Code2 className="text-primary" size={24} />
             <span className="font-semibold text-base font-mono tracking-tight hidden sm:inline">
-              KI_Code_Camp FFM
+              DevBarcamp FFM
             </span>
           </a>
 

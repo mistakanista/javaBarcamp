@@ -56,7 +56,11 @@ export const Navigation = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-primary-foreground/80 hover:text-primary transition-colors font-medium"
+                className={`text-sm font-medium transition-colors ${
+                  isScrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-primary-foreground/70 hover:text-primary-foreground"
+                }`}
               >
                 {link.label}
               </a>
