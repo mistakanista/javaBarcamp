@@ -18,6 +18,7 @@ public class TopicService {
 
     public static final String SAVED_SUCCESSFULLY = "Topic saved successfully: ";
     public static final String ACCEPTED_SUCCESSFULLY = "Topic accepted successfully: ";
+    public static final String DELETED_SUCCESSFULLY = "Topic deleted successfully: ";
     public static final String ERROR_SAVING = "Error saving topic: ";
     public static final String TOPIC_NOT_FOUND = "A topic with this id could not be found: ";
     public static final String LIKES_INCREASED = "Likes increased for topic: ";
@@ -85,6 +86,19 @@ public class TopicService {
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
 
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    public ResponseEntity<String> deleteTopic(Long id) {
+        String response = TOPIC_NOT_FOUND + id;
+        Optional<Topic> topicOptional = repository.findById(id);
+        if (topicOptional.isPresent()) {
+            Topic topic = topicOptional.get();
+            repository.delete(topic);
+            response = DELETED_SUCCESSFULLY + topic.getTitle();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        }
+        log.warn(response);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 }
