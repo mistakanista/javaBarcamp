@@ -28,7 +28,7 @@ export const Hero = () => {
             <span className="text-primary"> Frankfurt</span>
             <br />
             <span className="font-mono text-3xl md:text-5xl font-light text-primary-foreground/60">
-              2026
+              2027
             </span>
           </h1>
 
