@@ -33,7 +33,7 @@ export const Hero = () => {
           {/* Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-primary-foreground mb-6 animate-slide-up">
             Java Barcamp
-            <span className="block">FFM 2026</span>
+            <span className="block">FFM 2027</span>
           </h1>
 
           {/* Subtitle */}

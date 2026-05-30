@@ -11,7 +11,7 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="text-primary" size={28} />
-              <span className="text-xl font-bold">KI_Code_Camp Frankfurt</span>
+              <span className="text-xl font-bold">Java Barcamp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               {t("footerSlogan")}
