@@ -5,8 +5,10 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const UnRegistration = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -18,8 +20,8 @@ export const UnRegistration = () => {
 
     if (!formData.email.trim()) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in your email.",
+        title: t("missingInformation"),
+        description: t("emailMissing"),
         variant: "destructive",
       });
       return;
@@ -40,14 +42,14 @@ export const UnRegistration = () => {
     console.log("resp", response);
     if (response.status >= 400) {
       toast({
-        title: "Unregistration failed",
-        description: "There was an error when trying to unregister.",
+        title: t("unregisterFailure"),
+        description: t("unregisterFailureText"),
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Unregistration Successful! ☕",
-        description: "Please check your emails to complete the unregistration for Dev Camp Frankfurt 2026!",
+        title: t("unregisterSuccess"),
+        description: t("unregisterSuccessText"),
       });
     }
 
@@ -62,18 +64,18 @@ export const UnRegistration = () => {
           <div className="mb-10">
             <p className="text-xs font-mono text-primary tracking-widest uppercase mb-3">Registration</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-3 tracking-tight">
-              Unregister your spot
+              {t("unregisterTitle")}
             </h2>
             <p className="text-muted-foreground">
-              Please enter your email address to unregister from DevCamp Frankfurt 2026.
+              {t("unregisterText")}
             </p>
           </div>
 
           <Card className="border border-border shadow-sm">
             <CardHeader className="pb-4">
-              <CardTitle className="text-base">Your details</CardTitle>
+              <CardTitle className="text-base">{t("unregisterDetail")}</CardTitle>
               <CardDescription className="text-sm">
-                We'll send you an email to confirm your unregistration
+                {t("unregisterConfirmation")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -97,7 +99,7 @@ export const UnRegistration = () => {
                 <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Unregistering…" : (
                     <>
-                      Complete Unregistration
+                      {t("unregisterSend")}
                       <ArrowRight size={16} />
                     </>
                   )}

@@ -1,6 +1,8 @@
 import { Code2, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+    const { t } = useTranslation();
   return (
     <footer className="hero-gradient py-16">
       <div className="section-container">
@@ -9,11 +11,10 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="text-primary" size={28} />
-              <span className="text-xl font-bold">Developer Barcamp Frankfurt</span>
+              <span className="text-xl font-bold">KI_Code_Camp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              The premier Developer unconference in Frankfurt am Main.
-              By the community, for the community.
+              {t("footerSlogan")}
             </p>
           </div>
 
@@ -25,16 +26,16 @@ export const Footer = () => {
                 Home
               </a>
               <a href="/unregister" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Unregister
+                {t("unregister")}
               </a>
               <a href="/#sponsors" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Sponsors
+                {t("sponsors")}
               </a>
                <a href="/#topics" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Topics
+                {t("topics")}
               </a>
               <a href="/#schedule" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Schedule
+                {t("schedule")}
               </a>
             </nav>
           </div>
@@ -75,7 +76,7 @@ export const Footer = () => {
               </a>
             </div>
             <p className="text-sm text-primary-foreground/70">
-              info@devcamp-frankfurt.de
+              info@kicodecamp-frankfurt.de
             </p>
           </div>
         </div>
@@ -83,7 +84,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center">
           <p className="text-sm text-primary-foreground/50">
-            © {new Date().getFullYear()} Developer Barcamp Frankfurt. Made with ☕ and ❤️
+            © {new Date().getFullYear()} KI_Code_Camp Frankfurt. Made with ☕ and ❤️
           </p>
         </div>
       </div>

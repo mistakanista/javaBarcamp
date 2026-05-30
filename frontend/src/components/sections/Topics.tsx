@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Lightbulb, ThumbsUp, Send, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Topic {
   id: number;
@@ -24,6 +25,7 @@ export const Topics = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [topicsFetched, setTopicsFetched] = useState(false);
   const [message, setMessage] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
 
@@ -117,10 +119,10 @@ export const Topics = () => {
       <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Session Topics
+            {t("sessionTopics")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Suggest topics you'd like to present or discuss. Vote for your favorites!
+            {t("sessionTopicsIntro")}
           </p>
         </div>
 
@@ -131,29 +133,29 @@ export const Topics = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Lightbulb className="text-primary" />
-                  Suggest a Topic
+                  {t("suggestTopic")}
                 </CardTitle>
                 <CardDescription>
-                  Have an idea? Share it with the community!
+                  {t("suggestTopicIntro")}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="topic-title">Topic Title *</Label>
+                    <Label htmlFor="topic-title">{t("topicTitle")} *</Label>
                     <Input
                       id="topic-title"
-                      placeholder="e.g., Reactive Streams Deep Dive"
+                      placeholder={t("topicTitlePlaceholder")}
                       value={newTopicRequest.title}
                       onChange={(e) => setNewTopicRequest({ ...newTopicRequest, title: e.target.value })}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="topic-desc">Description</Label>
+                    <Label htmlFor="topic-desc">{t("topicDescription")}</Label>
                     <Textarea
                       id="topic-desc"
-                      placeholder="What would you like to cover?"
+                      placeholder={t("topicDescriptionPlaceholder")}
                       value={newTopicRequest.description}
                       onChange={(e) => setNewTopicRequest({ ...newTopicRequest, description: e.target.value })}
                       rows={3}
@@ -161,17 +163,17 @@ export const Topics = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="topic-name">Your Name *</Label>
+                    <Label htmlFor="topic-name">{t("topicYourName")} *</Label>
                     <Input
                       id="topic-name"
-                      placeholder="Your name"
+                      placeholder={t("topicYourName")}
                       value={newTopicRequest.name}
                       onChange={(e) => setNewTopicRequest({ ...newTopicRequest, name: e.target.value })}
                     />
                    </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="topic-name">Categories (comma separated)</Label>
+                        <Label htmlFor="topic-name">{t("topicTags")}</Label>
                         <Input
                           id="topic-categories"
                           placeholder="Spring, Graal VM"
@@ -186,7 +188,7 @@ export const Topics = () => {
                     ) : (
                       <>
                         <Send size={16} />
-                        Submit Topic
+                        {t("topicSubmit")}
                       </>
                     )}
                   </Button>
@@ -199,7 +201,7 @@ export const Topics = () => {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="text-primary" size={20} />
-              <span className="font-semibold">{topics.length} Topics Suggested</span>
+              <span className="font-semibold">{topics.length} {t("topicsSuggested")}</span>
             </div>
 
             {topics.map((topic, index) => (

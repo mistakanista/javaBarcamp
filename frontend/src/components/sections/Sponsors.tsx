@@ -60,7 +60,7 @@ export const Sponsors = () => {
             {t("sponsors")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Thanks to our amazing sponsors who make this event possible
+            {t("sponsorsIntro")}
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export const Sponsors = () => {
         <div className="mb-16">
           <div className="flex items-center justify-center gap-3 mb-8">
             <Crown className="text-gold" size={28} />
-            <h3 className="text-2xl font-bold">Gold Sponsors</h3>
+            <h3 className="text-2xl font-bold">{t("goldSponsors")}</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {goldSponsors.map((sponsor) => (
@@ -91,7 +91,7 @@ export const Sponsors = () => {
         <div>
           <div className="flex items-center justify-center gap-3 mb-8">
             <Award className="text-silver" size={24} />
-            <h3 className="text-xl font-bold text-muted-foreground">Silver Sponsors</h3>
+            <h3 className="text-xl font-bold text-muted-foreground">{t("silverSponsors")}</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {silverSponsors.map((sponsor) => (
@@ -117,13 +117,13 @@ export const Sponsors = () => {
         {/* Become a Sponsor CTA */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground mb-4">
-            Interested in sponsoring Java Barcamp Frankfurt?
+            {t("sponsorsInterest")}
           </p>
           <a
             href="mailto:sponsors@javabarcamp-frankfurt.de"
             className="text-primary font-semibold hover:underline"
           >
-            Contact us for sponsorship opportunities →
+            {t("sponsorsContact")}  →
           </a>
         </div>
       </div>
