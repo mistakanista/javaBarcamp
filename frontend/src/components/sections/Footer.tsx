@@ -1,6 +1,8 @@
 import { Code2, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+    const { t } = useTranslation();
   return (
     <footer className="hero-gradient py-16">
       <div className="section-container">
@@ -12,8 +14,7 @@ export const Footer = () => {
               <span className="text-xl font-bold">KI_Code_Camp Frankfurt</span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
-              The premier AI developer unconference in Frankfurt am Main.
-              By the community, for the community.
+              {t("footerSlogan")}
             </p>
           </div>
 
@@ -25,16 +26,16 @@ export const Footer = () => {
                 Home
               </a>
               <a href="/unregister" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Unregister
+                {t("unregister")}
               </a>
               <a href="/#sponsors" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Sponsors
+                {t("sponsors")}
               </a>
                <a href="/#topics" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Topics
+                {t("topics")}
               </a>
               <a href="/#schedule" className="block text-primary-foreground/70 hover:text-primary transition-colors">
-                Schedule
+                {t("schedule")}
               </a>
             </nav>
           </div>

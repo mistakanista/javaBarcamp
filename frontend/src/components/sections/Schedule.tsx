@@ -5,10 +5,10 @@ import {
   ClipboardList, 
   Presentation, 
   UtensilsCrossed, 
-  GraduationCap, 
-  PartyPopper,
+  GraduationCap,
   Clock
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ScheduleItem {
   time: string;
@@ -18,104 +18,99 @@ interface ScheduleItem {
   highlight?: boolean;
 }
 
-const scheduleItems: ScheduleItem[] = [
-  {
-    time: "08:30 - 09:00",
-    title: "Welcome & Coffee",
-    description: "Arrive, grab a fresh coffee, and connect with fellow Java enthusiasts",
-    icon: <Coffee className="text-primary" size={24} />,
-  },
-  {
-    time: "09:00 - 09:30",
-    title: "Opening & Introduction",
-    description: "Welcome address, barcamp rules explained, and sponsor introductions",
-    icon: <Users className="text-primary" size={24} />,
-  },
-  {
-    time: "09:30 - 10:30",
-    title: "Topic Pitching",
-    description: "Everyone who wants to present a session gets 30 seconds to pitch their topic",
-    icon: <ClipboardList className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "10:30 - 11:00",
-    title: "Schedule Creation",
-    description: "Voting and arranging sessions into time slots and rooms",
-    icon: <Clock className="text-primary" size={24} />,
-  },
-  {
-    time: "11:00 - 12:00",
-    title: "Morning Sessions (Block 1)",
-    description: "First round of parallel sessions across multiple rooms",
-    icon: <Presentation className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "12:00 - 13:00",
-    title: "Morning Sessions (Block 2)",
-    description: "Second round of parallel sessions",
-    icon: <Presentation className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "13:00 - 14:00",
-    title: "Lunch Break",
-    description: "Enjoy a delicious lunch, network with participants, and recharge",
-    icon: <UtensilsCrossed className="text-primary" size={24} />,
-  },
-  {
-    time: "14:00 - 15:00",
-    title: "Afternoon Sessions (Block 3)",
-    description: "Third round of parallel sessions",
-    icon: <Presentation className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "15:00 - 16:00",
-    title: "Afternoon Sessions (Block 4)",
-    description: "Fourth round of parallel sessions",
-    icon: <Presentation className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "16:00 - 16:30",
-    title: "Coffee Break",
-    description: "Grab a snack and discuss the day's learnings",
-    icon: <Coffee className="text-primary" size={24} />,
-  },
-  {
-    time: "16:30 - 17:30",
-    title: "Final Sessions (Block 5)",
-    description: "Last round of sessions before the closing",
-    icon: <GraduationCap className="text-primary" size={24} />,
-    highlight: true,
-  },
-  {
-    time: "17:30 - 18:00",
-    title: "Closing Ceremony",
-    description: "Wrap-up, highlights, thank yous, and announcements",
-    icon: <Users className="text-primary" size={24} />,
-  },
-  {
-    time: "18:00 - late",
-    title: "Evening Social Event",
-    description: "Join us for drinks, food, and networking at a nearby venue",
-    icon: <PartyPopper className="text-primary" size={24} />,
-    highlight: true,
-  },
-];
+
 
 export const Schedule = () => {
+  const { t } = useTranslation();
+  const scheduleItems: ScheduleItem[] = [
+    {
+      time: "08:30 - 09:00",
+      title: t("eventWelcome"),
+      description: t("eventWelcomeDescription"),
+      icon: <Coffee className="text-primary" size={24} />,
+    },
+    {
+      time: "09:00 - 09:30",
+      title: t("eventOpening"),
+      description: t("eventOpeningDescription"),
+      icon: <Users className="text-primary" size={24} />,
+    },
+    {
+      time: "09:30 - 10:30",
+      title: t("eventTopicPitching"),
+      description: t("eventTopicPitchingDescription"),
+      icon: <ClipboardList className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "10:30 - 11:00",
+      title: t("eventPlanning"),
+      description: t("eventPlanningDescription"),
+      icon: <Clock className="text-primary" size={24} />,
+    },
+    {
+      time: "11:00 - 12:00",
+      title: t("eventMorning"),
+      description: t("eventMorningDescription"),
+      icon: <Presentation className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "12:00 - 13:00",
+      title: t("eventMorning2"),
+      description: t("eventMorning2Description"),
+      icon: <Presentation className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "13:00 - 14:00",
+      title: t("eventLunch"),
+      description: t("eventLunchDescription"),
+      icon: <UtensilsCrossed className="text-primary" size={24} />,
+    },
+    {
+      time: "14:00 - 15:00",
+      title: t("eventAfternoon"),
+      description: t("eventAfternoonDescription"),
+      icon: <Presentation className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "15:00 - 16:00",
+      title: t("eventAfternoon4"),
+      description: t("eventAfternoon4Description"),
+      icon: <Presentation className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "16:00 - 16:30",
+      title: t("eventCoffee"),
+      description: t("eventCoffeeDescription"),
+      icon: <Coffee className="text-primary" size={24} />,
+    },
+    {
+      time: "16:30 - 17:30",
+      title: t("eventAfternoon5"),
+      description: t("eventAfternoon5Description"),
+      icon: <GraduationCap className="text-primary" size={24} />,
+      highlight: true,
+    },
+    {
+      time: "17:30 - 18:00",
+      title: t("eventClosing"),
+      description: t("eventClosingDescription"),
+      icon: <Users className="text-primary" size={24} />,
+    },
+  ];
   return (
     <section id="schedule" className="py-24 bg-background">
       <div className="section-container">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Event Schedule
+            {t("eventSchedule")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A full day of learning, sharing, and connecting with the Java community
+            {t("eventScheduleIntro")}
           </p>
         </div>
 
