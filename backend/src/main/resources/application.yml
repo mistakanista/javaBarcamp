@@ -5,7 +5,6 @@ spring:
     password: ${POSTGRES_PASSWORD}
   liquibase:
     enabled: true
-    drop-first: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
   web:
     resources:
