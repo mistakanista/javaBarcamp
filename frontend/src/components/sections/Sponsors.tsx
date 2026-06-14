@@ -20,7 +20,6 @@ export const Sponsors = () => {
           const res = await fetch(`/api/sponsors/list?level=gold`);
 
           const data = await res.json();
-          console.log("data", data);
 
           setGoldSponsors(data);
         } catch {
@@ -73,14 +72,27 @@ export const Sponsors = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {goldSponsors.map((sponsor) => (
               <Card key={sponsor.company} className="group border-gold/20 hover:border-gold/40 transition-colors">
-                <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px]">
-                  <img
-                        key={sponsor.company}
-                        src={host + "sponsors/" + sponsor.logo}
-                        alt={sponsor.company}
-                        className="h-16 object-contain"
-                      />
-                  <span className="font-medium">{sponsor.company}</span>
+                <CardContent className="p-8 flex flex-col items-center justify-center text-center min-h-[140px]">
+                    {sponsor.link ? (
+                      <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={host + "sponsors/" + sponsor.logo}
+                          alt={sponsor.company}
+                          className="h-16 object-contain"
+                        />
+                        <span className="font-medium">{sponsor.company}</span>
+                      </a>
+                    ) : (
+                      <>
+                        <img
+                          src={host + "sponsors/" + sponsor.logo}
+                          alt={sponsor.company}
+                          className="h-16 object-contain"
+                        />
+                        <span className="font-medium">{sponsor.company}</span>
+                      </>
+                    )}
+
                 </CardContent>
               </Card>
             ))}
@@ -95,21 +107,30 @@ export const Sponsors = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {silverSponsors.map((sponsor) => (
-              <Card
-                key={sponsor.company}
-                className="group relative overflow-hidden border border-silver/30 hover:border-silver transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
-              >
-                <div className="absolute inset-0 silver-gradient opacity-5 group-hover:opacity-10 transition-opacity" />
-                <CardContent className="p-6 flex flex-col items-center justify-center min-h-[120px]">
-                  <img
-                      key={sponsor.company}
-                      src={host + "sponsors/" + sponsor.logo}
-                      alt={sponsor.company}
-                      className="h-16 object-contain"
-                    />
-                  <span className="text-sm font-medium text-muted-foreground">{sponsor.company}</span>
-                </CardContent>
-              </Card>
+              <Card key={sponsor.company} className="group border-silver/20 hover:border-silver/40 transition-colors">
+                  <CardContent className="p-8 flex flex-col items-center justify-center text-center min-h-[140px]">
+                      {sponsor.link ? (
+                        <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
+                          <img
+                            src={host + "sponsors/" + sponsor.logo}
+                            alt={sponsor.company}
+                            className="h-16 object-contain"
+                          />
+                          <span className="font-medium">{sponsor.company}</span>
+                        </a>
+                      ) : (
+                        <>
+                          <img
+                            src={host + "sponsors/" + sponsor.logo}
+                            alt={sponsor.company}
+                            className="h-16 object-contain"
+                          />
+                          <span className="font-medium">{sponsor.company}</span>
+                        </>
+                      )}
+
+                  </CardContent>
+               </Card>
             ))}
           </div>
         </div>

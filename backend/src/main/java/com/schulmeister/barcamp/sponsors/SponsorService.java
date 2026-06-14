@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,6 +36,7 @@ public class SponsorService {
         sponsor.setLogo(request.getLogo());
         sponsor.setLevel(request.getLevel());
         sponsor.setSort(request.getSort());
+        sponsor.setLink(request.getLink());
 
         try {
             response = SPONSOR_ADDED + request.getCompany();
@@ -45,7 +44,7 @@ public class SponsorService {
         } catch (Exception e) {
             response = ERROR_SAVING_COMPANY + request.getCompany();
             log.error(response + " {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(response);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

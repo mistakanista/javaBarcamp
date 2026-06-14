@@ -27,6 +27,9 @@ public class Sponsor {
     @Column(nullable = false)
     private String level;
 
+    @Column
+    private String link;
+
     private Integer sort;
 }
 
