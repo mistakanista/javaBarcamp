@@ -66,7 +66,7 @@ class SponsorServiceTest {
 
         ResponseEntity<String> responseEntity = sponsorService.add(request);
         assertNotNull(responseEntity);
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_CONTENT, responseEntity.getStatusCode());
         String response =responseEntity.getBody();
         assertNotNull(response);
         assertNotEquals("", response);

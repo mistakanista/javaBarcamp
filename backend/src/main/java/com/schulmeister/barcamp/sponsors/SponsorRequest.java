@@ -24,4 +24,6 @@ public class SponsorRequest {
 
     private Integer sort;
 
+    private String link;
+
 }
