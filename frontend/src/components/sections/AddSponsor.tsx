@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Building, Image, BadgeEuro, ListOrdered, CheckCircle } from "lucide-react";
+import { User, Mail, Building, BadgeEuro, ListOrdered, CheckCircle, Link } from "lucide-react";
 import { LogoUpload } from "@/components/sections/LogoUpload";
 
 export const AddSponsor = () => {
@@ -19,6 +19,7 @@ export const AddSponsor = () => {
     logo: "",
     level: "",
     sort: "",
+    link: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,6 +67,7 @@ export const AddSponsor = () => {
         logo: formData.logo,
         level: formData.level,
         sort: formData.sort,
+        link: formData.link,
       }),
     });
     console.log("resp", response);
@@ -86,9 +88,9 @@ export const AddSponsor = () => {
         title: "Sponsor added successfully! ☕",
         description: "Please check the sponsor page!",
       });
+      setFormData({ name: "", email: "", company: "", logo: "", level: "", sort: "", link: "", });
     }
 
-    setFormData({ name: "", email: "", company: "", logo: "", level: "", sort: "" });
     setIsSubmitting(false);
   };
 
@@ -156,6 +158,21 @@ export const AddSponsor = () => {
                     placeholder="max@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="h-12"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="link" className="flex items-center gap-2">
+                    <Link size={16} />
+                    Link
+                  </Label>
+                  <Input
+                    id="link"
+                    type="link"
+                    placeholder="https://www.google.com"
+                    value={formData.link}
+                    onChange={(e) => setFormData({ ...formData, link: e.target.value })}
                     className="h-12"
                   />
                 </div>
