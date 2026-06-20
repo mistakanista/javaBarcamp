@@ -89,11 +89,20 @@ public class RegistrationService {
             log.warn(response);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
-        String unregisterToken = UUID.randomUUID().toString();
+
         Registration registration = registrationOptional.get();
+        String unregisterToken = UUID.randomUUID().toString();
         registration.setUnregisterToken(unregisterToken);
-        repository.save(registration);
-        response = UNREGISTER_EMAIL_SENT + request.getEmail();
+        try {
+            response = UNREGISTER_EMAIL_SENT + request.getEmail();
+            repository.save(registration);
+            mailService.sendUregisterMail(registration, true);
+        } catch (Exception e) {
+            response = ERROR_SAVING + request.getEmail();
+            log.error(response + " {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(response);
+        }
+        log.info(response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

@@ -22,6 +22,7 @@ public class RegistrationController {
 
     @PostMapping("unregister")
     public ResponseEntity<String> unRegisterRequest(@RequestBody @Valid UnRegistrationRequest request) {
+        log.info("unregister request {}", request.getEmail());
         return registrationService.unRegisterRequest(request);
     }
 
@@ -37,6 +38,7 @@ public class RegistrationController {
 
     @DeleteMapping
     public ResponseEntity<String> unregister(@RequestParam("token") String token) {
+        log.info("delete token {}", token);
         return registrationService.deleteUser(token);
     }
 }

@@ -59,4 +59,30 @@ class MailServiceServiceTest {
 
         verify(mailSender, times(0)).send(any(SimpleMailMessage.class));
     }
+
+    @Test
+    void unregisterMailSent() {
+
+        String token = UUID.randomUUID().toString();
+        Registration registration = new Registration();
+        registration.setUnregisterToken(token);
+        registration.setEmail(email);
+        when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
+        mailService.sendConfirmationMail(registration, true);
+
+        verify(mailSender, times(1)).send(any(MimeMessage.class));
+    }
+
+    @Test
+    void unregisterMailNotSent() {
+
+        String token = UUID.randomUUID().toString();
+        Registration registration = new Registration();
+        registration.setUnregisterToken(token);
+        registration.setEmail(email);
+        when(mailSender.createMimeMessage()).thenReturn(mimeMessage);
+        mailService.sendConfirmationMail(registration, false);
+
+        verify(mailSender, times(0)).send(any(SimpleMailMessage.class));
+    }
 }
