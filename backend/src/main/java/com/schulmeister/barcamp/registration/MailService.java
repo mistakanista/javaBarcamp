@@ -57,10 +57,10 @@ public class MailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setTo(registration.getEmail());
-            helper.setSubject("Dev Barcamp Frankfurt Unregister");
+            helper.setSubject("Java Barcamp Frankfurt Unregister");
 
             helper.setText("""
-                <h2>Thank you for unregistering from the Developer Barcamp in Frankfurt</h2>
+                <h2>Thank you for unregistering from the Java Barcamp in Frankfurt</h2>
                 <a href="%s">Click here to unregister</a>
                 """.formatted(confirmUrl), true);
 
