@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export default function ConfirmPage() {
-
+export default function DeleteRegistration() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const { t } = useTranslation();
@@ -19,11 +18,13 @@ export default function ConfirmPage() {
 
     const fetchConfirm = async () => {
       try {
-        const res = await fetch(`/api/registrations/confirm?token=${token}`);
+        const res = await fetch(`/api/registrations?token=${token}`, {
+            method: "DELETE",
+        });
         setStatus(res.status);
 
         const text = await res.text(); 
-        console.log("test", text)// Body auslesen
+        console.log("text", text)// Body auslesen
         setMessage(text);
       } catch {
         setMessage("Network error");
@@ -38,7 +39,7 @@ export default function ConfirmPage() {
         <ScrollToHash />
         <Navigation /><div className="flex min-h-screen items-center justify-center bg-muted">
         <div className="text-center">
-              <h1 className="mb-4 text-4xl font-bold">{t("registrationConfirmed")}</h1>
+              <h1 className="mb-4 text-4xl font-bold">{t("unregisterConfirmed")}</h1>
               {status !== null && <p className="mb-4 text-xl text-muted-foreground">{t("status")} {status}</p>}
               <p className="mb-4 text-xl text-muted-foreground">{message}</p>
               <a href="/" className="text-primary underline hover:text-primary/90">
@@ -48,5 +49,6 @@ export default function ConfirmPage() {
         </div>
         <Footer />
     </div>
+
   );
 }

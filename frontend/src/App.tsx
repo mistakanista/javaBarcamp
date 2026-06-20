@@ -7,6 +7,7 @@ import ConfirmPage from "./pages/ConfirmPage";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnRegister from "./pages/UnregisterPage";
+import DeleteRegistration from "./pages/DeleteRegistrationPage";
 import AddSponsor from "./pages/Sponsors";
 import Topics from "./pages/Topics";
 import "./i18n";
@@ -24,6 +25,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/confirm" element={<ConfirmPage />} />
           <Route path="/unregister" element={<UnRegister />} />
+          <Route path="/registrations" element={<DeleteRegistration />} />
           <Route path="/addSponsor" element={<AddSponsor />} />
           <Route path="/topics" element={<Topics />} />
           <Route path="*" element={<NotFound />} />
